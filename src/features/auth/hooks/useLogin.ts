@@ -31,8 +31,8 @@ export const useLogin = () => {
     onSuccess: (data) => {
       resetForm();
       toast.success("Login successful", toastOption);
-      createAuthCookie("oasisAfrikUserId", data?.accessToken);
-      createAuthCookie("refreshToken", data?.refreshToken);
+      createAuthCookie("oasisAfrikAdminId", data?.accessToken);
+      createAuthCookie("refreshAdminToken", data?.refreshToken);
       dispatch(setUser(data.user));
       router.push("/dashboard/overview");
     },

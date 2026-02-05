@@ -1,7 +1,7 @@
 import AuthLayout from "@/components/templates/AuthLayout/AuthLayout";
 import LoginWrapper from "@/features/auth/components/LoginWrapper/LoginWrapper";
 
-export default function Home() {
+const page = () => {
   return (
     <AuthLayout
       title="Welcome to OasisAfrik Admin!"
@@ -10,4 +10,6 @@ export default function Home() {
       <LoginWrapper />
     </AuthLayout>
   );
-}
+};
+
+export default page;

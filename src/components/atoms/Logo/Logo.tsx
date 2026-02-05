@@ -1,14 +1,24 @@
 import Image from "next/image";
 import Link from "next/link";
 
-const Logo = ({ url = "/assets/images/logo.png" }: { url?: string }) => {
+const Logo = ({
+  imgUrl = "/assets/images/logo.png",
+  url = "/",
+  width = 120,
+  height = 20,
+}: {
+  imgUrl?: string;
+  url?: string;
+  width?: number;
+  height?: number;
+}) => {
   return (
-    <Link href="/">
+    <Link href={url}>
       <Image
-        src={url}
+        src={imgUrl}
         alt="logo"
-        width={120}
-        height={20}
+        width={width}
+        height={height}
         priority
         className="object-fit w-auto h-auto"
       />
