@@ -27,9 +27,9 @@ const chartConfig = {
 
 const AreaChartContent = () => {
   return (
-    <div className="max-w-[484px] w-full border border-gray-200 rounded-md">
+    <div className="flex-1 w-full border border-gray-200 rounded-md min-w-[280px]">
       <Card className="shadow-none border-0">
-        <CardHeader className="flex item-center justify-between">
+        <CardHeader className="flex item-center justify-between flex-wrap">
           <CardTitle>Order overview</CardTitle>
           <TimeFilterDropdown />
         </CardHeader>

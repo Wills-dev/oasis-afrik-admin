@@ -25,21 +25,17 @@ const chartData = [
 
 const chartConfig = {
   desktop: {
-    label: "Sent Quotes",
+    label: "Users",
     color: "#009933",
-  },
-  mobile: {
-    label: "Incoming Quotes",
-    color: "#EDEDED",
   },
 } satisfies ChartConfig;
 
 const BarChartContent = () => {
   return (
-    <div className="max-w-[600px] w-full border border-gray-200 rounded-md">
+    <div className="flex-1 w-full border border-gray-200 rounded-md min-w-[280px]">
       <Card className="shadow-none border-0">
         <CardHeader className="flex item-center justify-between">
-          <CardTitle>Quotes</CardTitle>
+          <CardTitle>Users</CardTitle>
           <TimeFilterDropdown />
         </CardHeader>
         <CardContent>
@@ -55,10 +51,9 @@ const BarChartContent = () => {
               />
               <ChartTooltip
                 cursor={false}
-                content={<ChartTooltipContent indicator="dashed" />}
+                content={<ChartTooltipContent hideLabel />}
               />
-              <Bar dataKey="desktop" fill="var(--color-desktop)" radius={4} />
-              <Bar dataKey="mobile" fill="var(--color-mobile)" radius={4} />
+              <Bar dataKey="desktop" fill="var(--color-desktop)" radius={8} />
             </BarChart>
           </ChartContainer>
         </CardContent>

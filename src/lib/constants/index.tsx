@@ -109,3 +109,10 @@ export const links = [
     ],
   },
 ];
+
+export const timePeriods = [
+  { value: "daily", label: "Daily" },
+  { value: "weekly", label: "Weekly" },
+  { value: "monthly", label: "Monthly" },
+  { value: "yearly", label: "Yearly" },
+];
