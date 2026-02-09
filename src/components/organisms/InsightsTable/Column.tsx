@@ -1,12 +1,10 @@
-import Link from "next/link";
 import { ArrowUpDown } from "lucide-react";
 import { CellContext, createColumnHelper } from "@tanstack/react-table";
 
 import { Button } from "@/components/ui/button";
-import { DropdownMenuItem } from "@/components/ui/dropdown-menu";
 
-import ColumnActionDropdown from "@/components/molecules/ColumnActionDropdown/ColumnActionDropdown";
 import StatusBubble from "@/components/atoms/StatusBubble/StatusBubble";
+import InsightsActionCell from "@/components/molecules/InsightsActionCell/InsightsActionCell";
 
 import { Insights } from "@/lib/types";
 import { formatDate } from "@/lib/helpers/dateFormats";
@@ -59,13 +57,7 @@ export const Column = [
     cell: ({ row }: CellContext<Insights, unknown>) => {
       const insight = row.original;
 
-      return (
-        <ColumnActionDropdown>
-          <DropdownMenuItem>
-            <Link href={`/insights/info/${insight.id}`}>View Details</Link>
-          </DropdownMenuItem>
-        </ColumnActionDropdown>
-      );
+      return <InsightsActionCell id={insight?.id} />;
     },
     enableSorting: false,
     enableHiding: false,
