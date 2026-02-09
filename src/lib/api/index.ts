@@ -24,3 +24,39 @@ export const getAllVerificationRequest = async ({
     throw error;
   }
 };
+
+export const getVerificationInfo = async ({ id }: { id: string }) => {
+  try {
+    const url = `/admin/verification/${id}`;
+    const { data } = await axiosInstance.get(url);
+    return data?.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const approveVerification = async ({ id }: { id: string }) => {
+  try {
+    const url = `/admin/verification/${id}/approve`;
+    const { data } = await axiosInstance.post(url);
+    return data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const rejectVerification = async ({
+  id,
+  rejectionReason,
+}: {
+  id: string;
+  rejectionReason: string;
+}) => {
+  try {
+    const url = `/admin/verification/${id}/reject`;
+    const { data } = await axiosInstance.post(url, { rejectionReason });
+    return data;
+  } catch (error) {
+    throw error;
+  }
+};

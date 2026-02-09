@@ -1,3 +1,5 @@
+import Label from "@/components/atoms/Label/Label";
+import Textarea from "@/components/atoms/TextArea/Textarea";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -18,6 +20,8 @@ const ConfirmAction = ({
   onConfirm,
   isPending,
   setOpen,
+  reason,
+  setReason,
 }: {
   title: string;
   description: string;
@@ -26,7 +30,10 @@ const ConfirmAction = ({
   open: boolean;
   isPending: boolean;
   setOpen: (value: boolean) => void;
+  reason?: string;
+  setReason?: (reason: string) => void;
 }) => {
+  const showTextArea = reason !== undefined && setReason !== undefined;
   return (
     <AlertDialog open={open} onOpenChange={setOpen}>
       <AlertDialogContent className="dark:bg-gray-900">
@@ -34,6 +41,18 @@ const ConfirmAction = ({
           <AlertDialogTitle>{title}</AlertDialogTitle>
           <AlertDialogDescription>{description}</AlertDialogDescription>
         </AlertDialogHeader>
+        {showTextArea && (
+          <div className="space-y-1">
+            <Label title="Reason for action" />
+            <Textarea
+              rows={5}
+              name="reason"
+              value={reason}
+              onChange={(e) => setReason(e.target.value)}
+              placeholder=""
+            />
+          </div>
+        )}
         <AlertDialogFooter>
           <AlertDialogCancel onClick={onCancel}>Cancel</AlertDialogCancel>
           <AlertDialogAction onClick={onConfirm} disabled={isPending}>

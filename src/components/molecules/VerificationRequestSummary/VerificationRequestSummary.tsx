@@ -33,7 +33,7 @@ const VerificationRequestSummary = ({
         value={pending || 0}
         icon={<Clock />}
         color="yellow"
-        onClick={() => onClick("pending")}
+        onClick={() => onClick("PENDING")}
       />
 
       <StatisticCard
@@ -41,7 +41,7 @@ const VerificationRequestSummary = ({
         value={accepted || 0}
         icon={<CheckCircle />}
         color="green"
-        onClick={() => onClick("approved")}
+        onClick={() => onClick("APPROVED")}
       />
 
       <StatisticCard
@@ -49,7 +49,7 @@ const VerificationRequestSummary = ({
         value={rejected || 0}
         icon={<XCircle />}
         color="red"
-        onClick={() => onClick("rejected")}
+        onClick={() => onClick("REJECTED")}
       />
     </CardWrapper>
   );
