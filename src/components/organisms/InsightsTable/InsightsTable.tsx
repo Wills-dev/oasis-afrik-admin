@@ -2,14 +2,15 @@
 
 import { motion } from "framer-motion";
 
-import { HistoryProps } from "@/lib/types";
-import { Column } from "./Column";
 import { ColumnDef } from "@tanstack/react-table";
+
+import { Column } from "./Column";
+import { HistoryProps } from "@/lib/types";
 
 import TableLoader from "@/components/atoms/skeleton/TableLoader";
 import TableWrapper from "../TableWrapper/TableWrapper";
 
-const VerificationRequestTable = ({
+const InsightsTable = ({
   isLoading,
   data,
   totalPages,
@@ -36,7 +37,7 @@ const VerificationRequestTable = ({
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.6, ease: "easeInOut" }}
-      className="space-y-6"
+      className="space-y-6 pt-10"
     >
       {isLoading ? (
         <TableLoader />
@@ -65,4 +66,4 @@ const VerificationRequestTable = ({
   );
 };
 
-export default VerificationRequestTable;
+export default InsightsTable;
