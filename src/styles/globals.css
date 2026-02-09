@@ -156,3 +156,16 @@ body {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+
+.ql-toolbar.ql-snow {
+  border: 1px solid var(--color-gray-200) !important;
+  border-radius: 6px 6px 0px 0px;
+}
+
+.ql-container.ql-snow {
+  border-bottom: 1px solid var(--color-gray-200) !important;
+  border-right: 1px solid var(--color-gray-200) !important;
+  border-left: 1px solid var(--color-gray-200) !important;
+  border-radius: 0px 0px 6px 6px;
+  height: 10rem !important;
+}

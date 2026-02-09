@@ -108,6 +108,20 @@ export interface Verification {
   };
 }
 
+export interface Insights {
+  id: string;
+  isPublished: boolean;
+  createdAt: string;
+  updatedAt: string;
+  title: string;
+  content: string;
+  image?: string;
+  author: {
+    firstName: string;
+    lastName: string;
+  };
+}
+
 export interface DateOptions {
   year: "numeric" | "2-digit" | undefined;
   month: "numeric" | "2-digit" | "short" | "long" | "narrow" | undefined;
