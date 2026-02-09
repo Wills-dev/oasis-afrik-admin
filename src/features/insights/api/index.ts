@@ -56,3 +56,23 @@ export const postInsight = async ({
     throw error;
   }
 };
+
+export const deleteInsight = async ({ id }: { id: string }) => {
+  try {
+    const url = `/admin/insights/${id}`;
+    const { data } = await axiosInstance.delete(url);
+    return data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const getInsightInfo = async ({ id }: { id: string }) => {
+  try {
+    const url = `/insights/${id}`;
+    const { data } = await axiosInstance.get(url);
+    return data?.data;
+  } catch (error) {
+    throw error;
+  }
+};

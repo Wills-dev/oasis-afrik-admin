@@ -1,10 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
-import { getOrderInfo } from "../api";
+import { getInsightInfo } from "../api";
 
-export const useGetOrderInfo = (orderId: string) => {
+export const useGetInsightInfo = (id: string) => {
   const { data, isPending, isLoading, isError, error, refetch } = useQuery({
-    queryKey: ["order info", orderId],
-    queryFn: () => getOrderInfo({ orderId }),
+    queryKey: ["insight info", id],
+    queryFn: () => getInsightInfo({ id }),
     enabled: true,
     staleTime: 5 * 60 * 1000,
     retry: 1,
