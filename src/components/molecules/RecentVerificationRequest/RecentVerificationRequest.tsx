@@ -54,7 +54,7 @@ const RecentVerificationRequest = () => {
                 key={company?.id}
               >
                 <div className="flex items-center gap-4 w-full justify-between">
-                  <p className="font-semibold capitalize whitespace-nowrap truncate flex-1">
+                  <p className="font-semibold text-gray-600 capitalize whitespace-nowrap truncate flex-1">
                     {company?.companyName}
                   </p>
                   <p className="text-gray-400 text-xs">

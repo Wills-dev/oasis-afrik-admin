@@ -14,11 +14,11 @@ export const axiosInstance = axios.create({
 //set the Auth token for any request
 axiosInstance.interceptors.request.use(
   function (config) {
-    const token = readAuthCookie("oasisAfrikUserId");
+    const token = readAuthCookie("oasisAfrikAdminId");
     config.headers.Authorization = token ? `Bearer ${token}` : "";
     return config;
   },
   (err) => {
     throw new Error(err);
-  }
+  },
 );
