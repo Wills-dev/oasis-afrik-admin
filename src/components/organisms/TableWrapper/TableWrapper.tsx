@@ -14,11 +14,11 @@ import {
   VisibilityState,
   RowSelectionState,
 } from "@tanstack/react-table";
-import ColumnSorting from "@/components/molecules/ColumnSorting/ColumnSorting";
 import TableHeaderWrap from "@/components/molecules/TableHeaderWrap/TableHeaderWrap";
 import TableBodyWrap from "@/components/molecules/TableBodyWrap/TableBodyWrap";
 import PaginationComponent from "@/components/molecules/PaginationComponent/PaginationComponent";
 import { TableWrapperProps } from "@/lib/types";
+import TableResourceToolbar from "@/components/molecules/TableResourceToolbar/TableResourceToolbar";
 
 const TableWrapper = ({
   columns,
@@ -33,6 +33,11 @@ const TableWrapper = ({
   isLastPage,
   limit,
   setLimit,
+  search,
+  handleChange,
+  handleClear,
+  onSubmit,
+  setCurrentPage,
 }: TableWrapperProps) => {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
@@ -65,9 +70,13 @@ const TableWrapper = ({
 
   return (
     <div className="space-y-2">
-      <div className="flex justify-end">
-        <ColumnSorting table={table} />
-      </div>
+      <TableResourceToolbar
+        search={search}
+        handleChange={handleChange}
+        handleClear={handleClear}
+        onSubmit={onSubmit}
+        table={table}
+      />
       <Table className="">
         <TableHeaderWrap table={table} />
         <TableBodyWrap table={table} columns={columns} />
@@ -83,6 +92,7 @@ const TableWrapper = ({
         isLastPage={isLastPage}
         limit={limit}
         setLimit={setLimit}
+        setCurrentPage={setCurrentPage}
       />
     </div>
   );

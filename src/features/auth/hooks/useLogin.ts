@@ -34,7 +34,7 @@ export const useLogin = () => {
       createAuthCookie("oasisAfrikAdminId", data?.accessToken);
       createAuthCookie("refreshAdminToken", data?.refreshToken);
       dispatch(setUser(data.user));
-      router.push("/dashboard/overview");
+      router.push("/overview");
     },
     onError: (error: ApiErrorResponse) => {
       console.log("error logging", error);

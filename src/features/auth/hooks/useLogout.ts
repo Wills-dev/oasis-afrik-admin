@@ -24,8 +24,8 @@ export const useLogout = () => {
     mutationFn: logout,
     onSuccess: () => {
       toast.success("Logout successfully", toastOption);
-      clearAuthClear("oasisAfrikUserId");
-      clearAuthClear("refreshToken");
+      clearAuthClear("oasisAfrikAdminId");
+      clearAuthClear("refreshAdminToken");
       dispatch(clearUser());
       queryClient.clear();
       router.push("/");

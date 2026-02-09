@@ -1,10 +1,26 @@
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+
+import { createAuthCookie, readAuthCookie } from "../helpers/cookie";
 
 export const useTableState = () => {
-  const [tab, setTab] = useState("");
-  const [currentPage, setCurrentPage] = useState(1);
-  const [limit, setLimit] = useState(10);
-  const [search, setSearch] = useState("");
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
+  const savedLimit = readAuthCookie("limit");
+
+  const initialPage = Number(searchParams.get("page")) || 1;
+  const initialLimit =
+    Number(searchParams.get("limit")) || Number(savedLimit) || 10;
+  const initialSearch = searchParams.get("search") || "";
+  const initialStatus = searchParams.get("status") || "";
+  const initialTab = searchParams.get("tab") || "";
+
+  const [status, setStatus] = useState(initialStatus);
+  const [tab, setTab] = useState(initialTab);
+  const [currentPage, setCurrentPage] = useState(initialPage);
+  const [limit, setLimit] = useState(initialLimit);
+  const [search, setSearch] = useState(initialSearch);
   const [filter, setFilter] = useState("");
   const [submittedQuery, setSubmittedQuery] = useState<string | null>(null);
 
@@ -44,6 +60,11 @@ export const useTableState = () => {
     setSearch(value);
   };
 
+  const handleStatusChange = (status: string) => {
+    setStatus(status);
+    setCurrentPage(1);
+  };
+
   const handleClear = () => {
     setSearch("");
     setSubmittedQuery(null);
@@ -54,10 +75,38 @@ export const useTableState = () => {
     setSubmittedQuery(search);
   };
 
+  const handleLimitChange = (newLimit: number) => {
+    setLimit(newLimit);
+    setCurrentPage(1);
+    createAuthCookie("limit", newLimit.toString());
+  };
+
+  const updateUrl = useCallback(() => {
+    const params = new URLSearchParams(searchParams.toString());
+
+    params.set("page", String(currentPage));
+    params.set("limit", String(limit));
+
+    if (tab) params.set("tab", tab);
+    else params.delete("tab");
+
+    if (search) params.set("search", search);
+    else params.delete("search");
+
+    if (status) params.set("status", status);
+    else params.delete("status");
+
+    router.replace(`?${params.toString()}`);
+  }, [router, search, searchParams, limit, currentPage, status, tab]);
+
+  useEffect(() => {
+    updateUrl();
+  }, [updateUrl]);
+
   return {
     currentPage,
     limit,
-    setLimit,
+    setLimit: handleLimitChange,
     nextPage,
     prevPage,
     goToFirstPage,
@@ -73,5 +122,8 @@ export const useTableState = () => {
     filter,
     tab,
     setTab,
+    status,
+    handleStatusChange,
+    setCurrentPage,
   };
 };

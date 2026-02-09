@@ -60,3 +60,8 @@ export interface ProductData {
   productId?: string;
   currencyId: string;
 }
+
+export interface SortOption {
+  label: string;
+  values: string[];
+}

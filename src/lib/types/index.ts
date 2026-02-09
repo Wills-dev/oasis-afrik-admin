@@ -1,4 +1,5 @@
 import { ColumnDef } from "@tanstack/react-table";
+import { FormEvent } from "react";
 
 export interface ApiErrorResponse {
   response?: {
@@ -37,11 +38,36 @@ export interface TableWrapperProps<TData = unknown> {
   isLastPage: (totalPages: number) => boolean;
   limit: number;
   setLimit: (limit: number) => void;
+  search?: string | number;
+  handleChange?: (search: string) => void;
+  handleClear?: () => void;
+  onSubmit?: (e: FormEvent) => void;
+  setCurrentPage?: (page: number) => void;
 }
 
 export interface optionsType {
   label: string;
   value: number | string;
+}
+
+export interface HistoryProps<TData = unknown> {
+  isLoading: boolean;
+  data: TData[];
+  totalPages: number;
+  currentPage: number;
+  prevPage: () => void;
+  nextPage: (totalPages: number) => void;
+  goToLastPage: (totalPages: number) => void;
+  goToFirstPage: () => void;
+  isFirstPage: () => boolean;
+  isLastPage: (totalPages: number) => boolean;
+  limit: number;
+  setLimit: (limit: number) => void;
+  search?: string | number;
+  handleChange?: (search: string) => void;
+  handleClear?: () => void;
+  onSubmit?: (e: FormEvent) => void;
+  setCurrentPage: (page: number) => void;
 }
 
 export interface Testimonial {
@@ -54,4 +80,39 @@ export interface Testimonial {
     initials: string;
   };
   highlighted?: boolean;
+}
+
+export interface Verification {
+  id: string;
+  adminName: string;
+  businessRegistrationNumber: string;
+  companyName: string;
+  companyEmail: string;
+  companyAddress: string;
+  phoneNumber: string;
+  cacDocumentUrl: string;
+  utilityDocumentUrl: string;
+  validIdUrl: string;
+  status: string;
+  rejectionReason: string | null;
+  reviewedAt: string | null;
+  reviewedBy: string | null;
+  createdAt: string;
+  updatedAt: string;
+  userId: string;
+  user: {
+    id: string;
+    firstName: string;
+    lastName: string;
+    email: string;
+  };
+}
+
+export interface DateOptions {
+  year: "numeric" | "2-digit" | undefined;
+  month: "numeric" | "2-digit" | "short" | "long" | "narrow" | undefined;
+  day: "numeric" | "2-digit" | undefined;
+  hour: "numeric" | "2-digit" | undefined;
+  minute: "numeric" | "2-digit" | undefined;
+  hour12: boolean;
 }
