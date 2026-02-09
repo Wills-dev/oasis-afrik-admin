@@ -1,6 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
 import { getOrderInfo } from "../api";
-import { orderInfo } from "../constants/dummy";
 
 export const useGetOrderInfo = (orderId: string) => {
   const { data, isPending, isLoading, isError, error, refetch } = useQuery({
@@ -13,7 +12,6 @@ export const useGetOrderInfo = (orderId: string) => {
 
   return {
     data,
-    orderInfo,
     isPending,
     isLoading,
     isError,

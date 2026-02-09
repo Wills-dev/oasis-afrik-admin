@@ -1,14 +1,18 @@
 "use client";
 
+import Image from "next/image";
+import dynamic from "next/dynamic";
 import { FormEvent, useEffect, useState } from "react";
-
-import ReactQuill from "react-quill-new";
 
 import ModalWrapper from "../../ModalWrapper/ModalWrapper";
 import Label from "@/components/atoms/Label/Label";
 import Input from "@/components/atoms/Input/Input";
 import Button from "@/components/atoms/Button/Button";
-import Image from "next/image";
+
+const ReactQuill = dynamic(() => import("react-quill-new"), {
+  ssr: false,
+});
+
 import { Delete } from "lucide-react";
 
 const PostInsightModal = ({

@@ -38,7 +38,7 @@ export const usePostInsight = () => {
     if (!selectedFile) return;
 
     const allowedTypes = ["image/jpeg", "image/jpg", "image/png"];
-    const maxSize = 2 * 1024 * 1024; // 2MB
+    const maxSize = 2 * 1024 * 1024;
 
     if (!allowedTypes.includes(selectedFile.type)) {
       toast.error("Only JPG, JPEG and PNG files are supported.");
