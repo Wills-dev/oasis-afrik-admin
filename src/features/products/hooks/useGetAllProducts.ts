@@ -1,9 +1,8 @@
-import { getUserProducts } from "../api";
 import { useTableState } from "@/lib/hooks/useTableState";
-
 import { useQuery } from "@tanstack/react-query";
+import { getProducts } from "../api";
 
-export const useGetUserProducts = () => {
+export const useGetAllProducts = () => {
   const {
     currentPage,
     limit,
@@ -19,14 +18,21 @@ export const useGetUserProducts = () => {
     handleClear,
     submittedQuery,
     handleSearch,
-    filter,
-    setFilter,
+    status,
+    setCurrentPage,
+    handleStatusChange,
   } = useTableState();
 
   const { data, isPending, isLoading, isError, error, refetch } = useQuery({
-    queryKey: ["seller's products", submittedQuery, limit, currentPage, filter],
+    queryKey: ["all products", submittedQuery, limit, currentPage, status],
     queryFn: () =>
-      getUserProducts({ currentPage, limit, search: submittedQuery, filter }),
+      getProducts({
+        currentPage,
+        limit,
+        search: submittedQuery,
+        status,
+      }),
+    enabled: true,
     staleTime: 5 * 60 * 1000,
     retry: 1,
   });
@@ -51,7 +57,7 @@ export const useGetUserProducts = () => {
     currentPage,
     limit,
     refetch,
-    filter,
-    setFilter,
+    setCurrentPage,
+    handleStatusChange,
   };
 };

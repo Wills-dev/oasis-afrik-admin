@@ -1,12 +1,12 @@
 "use client";
 
 import PageTitle from "@/components/atoms/PageTitle/PageTitle";
-import OrderSummary from "../OrderSummary/OrderSummary";
-import OrderTable from "../OrderTable/OrderTable";
+import ProductSummary from "../ProductSummary/ProductSummary";
 
-import { useGetOrders } from "../../hooks/useGetOrders";
+import { useGetAllProducts } from "../../hooks/useGetAllProducts";
+import ProductTable from "../ProductTable/ProductTable";
 
-const OrdersWrapper = () => {
+const ProductWrapper = () => {
   const {
     setLimit,
     nextPage,
@@ -25,23 +25,24 @@ const OrdersWrapper = () => {
     limit,
     setCurrentPage,
     handleStatusChange,
-  } = useGetOrders();
+  } = useGetAllProducts();
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-8">
       <PageTitle
-        title="All Orders"
-        description="Track all orders on the platform"
+        title="All Products"
+        description="Track and take action on all products on the platform"
       />
-      <OrderSummary
+      <ProductSummary
         isLoading={isLoading}
-        onClick={handleStatusChange}
         total={data?.stats?.total}
-        paid={data?.stats?.paid}
-        pending={data?.stats?.pending}
+        draft={data?.stats?.draft}
+        active={data?.stats?.active}
+        declined={data?.stats?.declined}
+        onClick={handleStatusChange}
       />
-      <OrderTable
-        data={data?.orders || []}
+      <ProductTable
+        data={data?.products || []}
         totalPages={data?.pagination?.totalPages}
         currentPage={currentPage}
         prevPage={prevPage}
@@ -63,4 +64,4 @@ const OrdersWrapper = () => {
   );
 };
 
-export default OrdersWrapper;
+export default ProductWrapper;
