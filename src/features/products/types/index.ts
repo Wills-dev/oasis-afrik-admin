@@ -40,6 +40,10 @@ export type CategorySummary = {
   name: string;
 };
 
+export interface ProductStatus {
+  status: "DRAFT" | "ACTIVE" | "INACTIVE" | "SOLD_OUT" | "DECLINED";
+}
+
 export type Product = {
   id: string;
   productId: string;
@@ -54,7 +58,7 @@ export type Product = {
   maxLeadTime: number;
   minLeadTimePeriodId: string;
   maxLeadTimePeriodId: string;
-  status: "DRAFT" | "ACTIVE" | "INACTIVE" | "SOLD_OUT" | "DECLINED";
+  status: string;
   mainImage: string;
   images: string[];
   createdAt: string;

@@ -17,7 +17,7 @@ const StatusBubble = ({ status }: { status: string }) => {
     REJECTED: "text-red-400 bg-red-50",
     DECLINED: "text-red-400 bg-red-50",
     INACTIVE: "text-yellow-400 bg-yellow-50",
-    DRAFT: "text-blue-400 bg-blue-50",
+    DRAFT: "text-orange-400 bg-orange-50",
     PUBLISHED: "text-green-400 bg-green-50",
     ARCHIVED: "text-yellow-400 bg-yellow-50",
     SOLD_OUT: "text-orange-400 bg-orange-50",

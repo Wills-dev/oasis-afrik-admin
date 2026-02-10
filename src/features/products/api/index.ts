@@ -47,11 +47,27 @@ export const getProductInfo = async ({ productId }: { productId: string }) => {
   }
 };
 
-export const deleteProduct = async ({ productId }: { productId: string }) => {
+export const approveProduct = async ({ id }: { id: string }) => {
   try {
-    const url = `/products/${productId}`;
-    const { data } = await axiosInstance.delete(url);
-    return data?.data;
+    const url = `/admin/products/${id}/approve`;
+    const { data } = await axiosInstance.post(url);
+    return data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const rejectProduct = async ({
+  id,
+  rejectionReason,
+}: {
+  id: string;
+  rejectionReason: string;
+}) => {
+  try {
+    const url = `/admin/products/${id}/reject`;
+    const { data } = await axiosInstance.post(url, { rejectionReason });
+    return data;
   } catch (error) {
     throw error;
   }
