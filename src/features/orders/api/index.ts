@@ -1,19 +1,25 @@
 import { axiosInstance } from "@/lib/axiosInstance";
 import { fetchDataProps } from "@/lib/types";
 
-export const getOrders = async ({
+export const getAllOrders = async ({
   currentPage,
   limit,
   search,
-  filter,
+  status,
 }: fetchDataProps) => {
   try {
-    const url = `/orders?page=${currentPage}&limit=${limit}${
-      filter ? `&filter=${filter}` : ""
-    }${search ? `&search=${search}` : ""}`;
+    const params = new URLSearchParams();
+
+    params.set("page", currentPage.toString());
+    params.set("limit", limit.toString());
+
+    if (search) params.set("search", search);
+    if (status) params.set("status", status);
+
+    const url = `/admin/orders?${params.toString()}`;
 
     const { data } = await axiosInstance.get(url);
-    return data?.data;
+    return data;
   } catch (error) {
     throw error;
   }

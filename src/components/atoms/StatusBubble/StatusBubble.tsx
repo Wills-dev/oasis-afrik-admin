@@ -9,6 +9,7 @@ const StatusBubble = ({ status }: { status: string }) => {
     completed: "text-green-400 bg-green-50",
     APPROVED: "text-green-400 bg-green-50",
     ACCEPTED: "text-green-400 bg-green-50",
+    PAID: "text-green-400 bg-green-50",
     received: "text-green-400 bg-green-50",
     verified: "text-green-400 bg-green-50",
     declined: "text-red-400 bg-red-50",

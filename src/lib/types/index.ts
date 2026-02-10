@@ -130,3 +130,10 @@ export interface DateOptions {
   minute: "numeric" | "2-digit" | undefined;
   hour12: boolean;
 }
+
+export type UserSummary = {
+  id: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+};
