@@ -18,14 +18,6 @@ export type BaseEntity = {
   updatedAt: string;
 };
 
-export type QuoteProduct = {
-  id: string;
-  productId: string;
-  name: string;
-  mainImage: string;
-  images: string[];
-};
-
 export type QuoteUser = {
   id: string;
   firstName: string;
@@ -81,7 +73,8 @@ export type Quote = BaseEntity & {
   buyerId: string;
   sellerId: string;
   amount: string;
-  currency: CurrencyObject;
+  currency: string;
+  currencyId: string | null;
   quantity: string;
   quantityUnitId: string;
   address: string;
@@ -91,9 +84,6 @@ export type Quote = BaseEntity & {
   maxLeadTimePeriodId: string | null;
   status: number;
   statusLabel: string;
-  product: QuoteProduct;
-  buyer: QuoteUser;
-  seller: QuoteUser;
   quantityUnit: QuantityUnit;
   minLeadTimePeriod: LeadTimePeriod;
   maxLeadTimePeriod: LeadTimePeriod;
