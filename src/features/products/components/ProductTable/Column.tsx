@@ -107,9 +107,9 @@ export const Columns = [
   {
     id: "actions",
     cell: ({ row }: CellContext<Product, unknown>) => {
-      const insight = row.original;
+      const product = row.original;
 
-      return <ProjectActionCell id={insight?.id} />;
+      return <ProjectActionCell id={product?.id} status={product?.status} />;
     },
     enableSorting: false,
     enableHiding: false,

@@ -6,27 +6,68 @@ import ColumnActionDropdown from "@/components/molecules/ColumnActionDropdown/Co
 import ConfirmAction from "@/components/molecules/ConfirmAction/ConfirmAction";
 import { DropdownMenuItem } from "@/components/ui/dropdown-menu";
 
-const ProjectActionCell = ({ id }: { id: string }) => {
+import { useApproveProduct } from "../../hooks/useApproveProduct";
+import { useRejectProduct } from "../../hooks/useRejectProduct";
+
+const ProjectActionCell = ({ id, status }: { id: string; status: string }) => {
+  const { handleApprove, isPending, isOpen, setIsOpen } = useApproveProduct();
+  const {
+    handleReject,
+    isRejecting,
+    rejectionReason,
+    setRejectionReason,
+    showRejectModal,
+    setShowRejectModal,
+  } = useRejectProduct();
+
   return (
     <>
       <ColumnActionDropdown>
         <DropdownMenuItem>
           <Link href={`/products/info/${id}`}>View Details</Link>
         </DropdownMenuItem>
-        <DropdownMenuItem>
-          {/* <button className="cursor-pointer text-red-600">Reject</button> */}
-          <button className="cursor-pointer text-green-600">Approve</button>
-        </DropdownMenuItem>
+        {status === "DRAFT" && (
+          <>
+            <DropdownMenuItem>
+              <button
+                className="cursor-pointer text-green-600"
+                onClick={() => setIsOpen(true)}
+              >
+                Approve
+              </button>
+            </DropdownMenuItem>
+            <DropdownMenuItem>
+              <button
+                className="cursor-pointer text-red-600"
+                onClick={() => setShowRejectModal(true)}
+              >
+                Reject
+              </button>
+            </DropdownMenuItem>
+          </>
+        )}
       </ColumnActionDropdown>
-      {/* <ConfirmAction
+
+      <ConfirmAction
         isPending={isPending}
         open={isOpen}
         setOpen={setIsOpen}
         onCancel={() => setIsOpen(false)}
-        onConfirm={() => handleDelete(id)}
-        title="Are You Sure You Want to delete Insight?"
-        description="Are you sure you want to delete this insight? When deleted, you can't retrive it anymore."
-      /> */}
+        onConfirm={() => handleApprove(id)}
+        title="Are You Sure You Want to approve this product?"
+        description="Are you sure you want to approve this product? The product will be visible to other users once you approve."
+      />
+      <ConfirmAction
+        isPending={isRejecting}
+        open={showRejectModal}
+        setOpen={setShowRejectModal}
+        onCancel={() => setShowRejectModal(false)}
+        onConfirm={() => handleReject(id)}
+        title="Are You Sure You Want to Reject This Product?"
+        description="Are you sure you want to reject this product? Other users won't have access to this product."
+        reason={rejectionReason}
+        setReason={setRejectionReason}
+      />
     </>
   );
 };
