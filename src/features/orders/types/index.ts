@@ -1,38 +1,31 @@
-import { User } from "@/features/auth/types";
-import { ProductType } from "@/features/products/types";
+import { UserSummary } from "@/lib/types";
+
+export type ProductSummary = {
+  id: string;
+  name: string;
+  productId: string;
+};
 
 export type Order = {
   id: string;
-  createdAt: string;
-  productName: string;
-  productId: string;
-  quantity: number;
-  price: string;
+  address: string;
   amount: string;
-  status:
-    | "pending"
-    | "processing"
-    | "declined"
-    | "in_transit"
-    | "delivered"
-    | "received";
-  minLead: number;
-  maxLead: number;
-  minLeadPeriod: "days" | "weeks" | "months";
-  maxLeadPeriod: "days" | "weeks" | "months";
-};
-
-export type OrderInfo = {
-  id: string;
+  amountChargedNgn: string | null;
+  buyerId: string;
+  sellerId: string;
+  productId: string;
+  quantity: string;
+  quantityUnitId: string;
+  quoteId: string;
+  currency: string;
+  currencyId: string | null;
+  paystackReference: string | null;
+  paidAt: string | null;
+  status: string;
   createdAt: string;
-  status:
-    | "pending"
-    | "processing"
-    | "declined"
-    | "in_transit"
-    | "delivered"
-    | "received";
-  product: ProductType;
-  seller: User;
-  buyer: User;
+  updatedAt: string;
+
+  buyer: UserSummary;
+  seller: UserSummary;
+  product: ProductSummary;
 };

@@ -1,4 +1,4 @@
-import { getOrders } from "../api";
+import { getAllOrders } from "../api";
 import { useTableState } from "@/lib/hooks/useTableState";
 
 import { useQuery } from "@tanstack/react-query";
@@ -19,14 +19,15 @@ export const useGetOrders = () => {
     handleClear,
     submittedQuery,
     handleSearch,
-    filter,
-    setFilter,
+    status,
+    setCurrentPage,
+    handleStatusChange,
   } = useTableState();
 
   const { data, isPending, isLoading, isError, error, refetch } = useQuery({
-    queryKey: ["orders", submittedQuery, limit, currentPage, filter],
+    queryKey: ["all orders", submittedQuery, limit, currentPage, status],
     queryFn: () =>
-      getOrders({ currentPage, limit, search: submittedQuery, filter }),
+      getAllOrders({ currentPage, limit, search: submittedQuery, status }),
     enabled: true,
     staleTime: 5 * 60 * 1000,
     retry: 1,
@@ -52,7 +53,7 @@ export const useGetOrders = () => {
     currentPage,
     limit,
     refetch,
-    filter,
-    setFilter,
+    setCurrentPage,
+    handleStatusChange,
   };
 };
