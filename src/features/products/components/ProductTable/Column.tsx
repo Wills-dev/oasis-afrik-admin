@@ -1,0 +1,117 @@
+import { createColumnHelper, CellContext } from "@tanstack/react-table";
+import Link from "next/link";
+import StatusBubble from "@/components/atoms/StatusBubble/StatusBubble";
+import { Product } from "../../types";
+import { formatDate } from "@/lib/helpers/dateFormats";
+import ProjectActionCell from "../ProjectActionCell/ProjectActionCell";
+
+const columnHelper = createColumnHelper<Product>();
+
+export const Columns = [
+  columnHelper.accessor("createdAt", {
+    header: "Created",
+    cell: ({ getValue }) => {
+      const date = getValue();
+      return <div>{formatDate(date)}</div>;
+    },
+  }),
+
+  columnHelper.accessor("name", {
+    header: "Product Name",
+    cell: ({ row }) => {
+      const product = row.original;
+      return (
+        <Link
+          href={`/products/info/${product.id}`}
+          className="text-primary hover:underline"
+        >
+          {product.name}
+        </Link>
+      );
+    },
+  }),
+
+  columnHelper.accessor((row) => row.user, {
+    id: "user",
+    header: "Owner",
+    cell: ({ getValue }) => {
+      const user = getValue();
+      return (
+        <Link href={`/users/info/${user.id}`} className="hover:underline">
+          {user.firstName} {user.lastName}
+        </Link>
+      );
+    },
+  }),
+
+  columnHelper.accessor((row) => row.category, {
+    id: "category",
+    header: "Category",
+    cell: ({ getValue }) => {
+      const category = getValue();
+      return <div>{category.name}</div>;
+    },
+  }),
+
+  columnHelper.accessor(
+    (row) => ({
+      quantity: row.quantity,
+      unitId: row.quantityUnitId,
+    }),
+    {
+      id: "quantity",
+      header: "Quantity",
+      cell: ({ getValue }) => {
+        const { quantity, unitId } = getValue();
+
+        const unitName = "";
+        return (
+          <div>
+            {Number(quantity).toLocaleString()} {unitName}
+          </div>
+        );
+      },
+    },
+  ),
+
+  columnHelper.accessor(
+    (row) => ({
+      price: row.price,
+      currencyId: row.currencyId,
+    }),
+    {
+      id: "price",
+      header: "Price",
+      cell: ({ getValue }) => {
+        const { price, currencyId } = getValue();
+
+        const currencySymbol = "";
+        return (
+          <div>
+            {currencySymbol}
+            {Number(price).toLocaleString()}
+          </div>
+        );
+      },
+    },
+  ),
+
+  columnHelper.accessor("status", {
+    header: "Status",
+    cell: ({ getValue }) => {
+      const status = getValue();
+      return <StatusBubble status={status} />;
+    },
+  }),
+
+  {
+    id: "actions",
+    cell: ({ row }: CellContext<Product, unknown>) => {
+      const insight = row.original;
+
+      return <ProjectActionCell id={insight?.id} />;
+    },
+    enableSorting: false,
+    enableHiding: false,
+  },
+];

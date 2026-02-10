@@ -1,4 +1,4 @@
-import { CurrencyObject } from "@/features/quotes/types";
+import { UserSummary } from "@/lib/types";
 
 export type ProductImageType = {
   id: string;
@@ -35,58 +35,36 @@ export type QuantityUnit = Timestamped & {
   abbreviation: string;
 };
 
-export type User = {
+export type CategorySummary = {
   id: string;
-  firstName: string;
-  lastName: string;
-  email: string;
+  name: string;
 };
 
-export type ProductType = {
+export type Product = {
   id: string;
   productId: string;
   name: string;
   description: string;
-  status: "DRAFT" | "PUBLISHED" | "ARCHIVED";
   price: string;
   quantity: string;
+  quantityUnitId: string;
   minOrder: string;
-  images: string[];
-  mainImage: string;
+  minOrderUnitId: string;
   minLeadTime: number;
   maxLeadTime: number;
+  minLeadTimePeriodId: string;
+  maxLeadTimePeriodId: string;
+  status: "DRAFT" | "ACTIVE" | "INACTIVE" | "SOLD_OUT" | "DECLINED";
+  mainImage: string;
+  images: string[];
   createdAt: string;
   updatedAt: string;
-  category: Category;
-  categoryId: string;
-  country: Country;
-  countryId: string;
-  minLeadTimePeriod: LeadTimePeriod;
-  minLeadTimePeriodId: string;
-  maxLeadTimePeriod: LeadTimePeriod;
-  maxLeadTimePeriodId: string;
-  minOrderUnit: Unit;
-  minOrderUnitId: string;
-  quantityUnit: QuantityUnit;
-  quantityUnitId: string;
-  user: User;
-  userId: string;
-  currency: CurrencyObject;
-};
 
-export type ProductFormData = {
-  productName: string;
-  category: string;
-  quantity: string;
-  unit: string;
-  country: string;
-  price: string;
-  currency: string;
-  minOrder: string;
-  minLead: string;
-  minLeadPeriod: string;
-  maxLead: string;
-  maxLeadPeriod: string;
-  description: string;
-  minOrderUnit: string;
+  currencyId: string | null;
+  categoryId: string;
+  countryId: string;
+  userId: string;
+
+  user: UserSummary;
+  category: CategorySummary;
 };

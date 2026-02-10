@@ -21,7 +21,13 @@ export type Order = {
   currencyId: string | null;
   paystackReference: string | null;
   paidAt: string | null;
-  status: string;
+  status:
+    | "PENDING_PAYMENT"
+    | "PAID"
+    | "PROCESSING"
+    | "SHIPPED"
+    | "DELIVERED"
+    | "CANCELLED";
   createdAt: string;
   updatedAt: string;
 

@@ -27,7 +27,7 @@ export const getAllOrders = async ({
 
 export const getOrderInfo = async ({ orderId }: { orderId: string }) => {
   try {
-    const url = `/orders/${orderId}`;
+    const url = `/admin/orders/${orderId}`;
     const { data } = await axiosInstance.get(url);
     return data?.data;
   } catch (error) {
