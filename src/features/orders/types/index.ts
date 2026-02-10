@@ -1,10 +1,15 @@
+import { Product } from "@/features/products/types";
+import { Quote } from "@/features/quotes/types";
 import { UserSummary } from "@/lib/types";
 
-export type ProductSummary = {
-  id: string;
-  name: string;
-  productId: string;
-};
+export type OrderStatus =
+  | "PENDING_PAYMENT"
+  | "PAID"
+  | "PROCESSING"
+  | "SHIPPED"
+  | "DELIVERED"
+  | "RECEIVED"
+  | "CANCELLED";
 
 export type Order = {
   id: string;
@@ -21,17 +26,12 @@ export type Order = {
   currencyId: string | null;
   paystackReference: string | null;
   paidAt: string | null;
-  status:
-    | "PENDING_PAYMENT"
-    | "PAID"
-    | "PROCESSING"
-    | "SHIPPED"
-    | "DELIVERED"
-    | "CANCELLED";
+  status: OrderStatus;
   createdAt: string;
   updatedAt: string;
 
   buyer: UserSummary;
   seller: UserSummary;
-  product: ProductSummary;
+  product: Product;
+  quote: Quote;
 };
