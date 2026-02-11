@@ -5,6 +5,7 @@ import UserStatSummary from "@/components/molecules/UserStatSummary/UserStatSumm
 import UsersTable from "../UsersTable/UsersTable";
 
 import { useGetAllUsers } from "@/lib/hooks/useGetAllUsers";
+import CreateAdminPanel from "@/components/molecules/CreateAdminPanel/CreateAdminPanel";
 
 const AllAdminWrapper = () => {
   const {
@@ -29,10 +30,13 @@ const AllAdminWrapper = () => {
 
   return (
     <div className="space-y-6">
-      <PageTitle
-        title="All Admins"
-        description="Track and monitor all admin activities on the platform"
-      />
+      <div className="flex md:items-center justify-between flex-wrap gap-4">
+        <PageTitle
+          title="All Admins"
+          description="Track and monitor all admin activities on the platform"
+        />
+        <CreateAdminPanel />
+      </div>
       <UserStatSummary
         isLoading={isLoading}
         onClick={handleStatusChange}

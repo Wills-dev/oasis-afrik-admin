@@ -155,3 +155,10 @@ export type UserTable = {
     sellerOrders: number;
   };
 };
+
+export interface CreateAdminData {
+  email: string;
+  password: string;
+  firstName: string;
+  lastName: string;
+}
