@@ -28,8 +28,9 @@ const UsersTable = ({
   handleClear,
   onSubmit,
   setCurrentPage,
+  isAdmin,
 }: HistoryProps) => {
-  const typedColumns = UserColumns as ColumnDef<unknown>[];
+  const typedColumns = UserColumns(isAdmin) as ColumnDef<unknown>[];
 
   return (
     <motion.div

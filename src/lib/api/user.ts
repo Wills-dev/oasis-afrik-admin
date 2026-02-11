@@ -41,3 +41,28 @@ export const updateUserStatus = async ({
     throw error;
   }
 };
+
+export const createAdmin = async ({
+  firstName,
+  lastName,
+  email,
+  password,
+}: {
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+}) => {
+  try {
+    const url = `/admin/users/admins`;
+    const { data } = await axiosInstance.post(url, {
+      firstName,
+      lastName,
+      email,
+      password,
+    });
+    return data;
+  } catch (error) {
+    throw error;
+  }
+};

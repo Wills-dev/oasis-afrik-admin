@@ -69,6 +69,7 @@ export interface HistoryProps<TData = unknown> {
   handleClear?: () => void;
   onSubmit?: (e: FormEvent) => void;
   setCurrentPage: (page: number) => void;
+  isAdmin?: boolean;
 }
 
 export interface Testimonial {
@@ -154,3 +155,10 @@ export type UserTable = {
     sellerOrders: number;
   };
 };
+
+export interface CreateAdminData {
+  email: string;
+  password: string;
+  firstName: string;
+  lastName: string;
+}

@@ -5,8 +5,9 @@ import UserStatSummary from "@/components/molecules/UserStatSummary/UserStatSumm
 import UsersTable from "../UsersTable/UsersTable";
 
 import { useGetAllUsers } from "@/lib/hooks/useGetAllUsers";
+import CreateAdminPanel from "@/components/molecules/CreateAdminPanel/CreateAdminPanel";
 
-const AllUserWrapper = () => {
+const AllAdminWrapper = () => {
   const {
     setLimit,
     nextPage,
@@ -25,14 +26,17 @@ const AllUserWrapper = () => {
     limit,
     setCurrentPage,
     handleStatusChange,
-  } = useGetAllUsers("USER");
+  } = useGetAllUsers("ADMIN");
 
   return (
     <div className="space-y-6">
-      <PageTitle
-        title="All Users"
-        description="Track and monitor all user activities on the platform"
-      />
+      <div className="flex md:items-center justify-between flex-wrap gap-4">
+        <PageTitle
+          title="All Admins"
+          description="Track and monitor all admin activities on the platform"
+        />
+        <CreateAdminPanel />
+      </div>
       <UserStatSummary
         isLoading={isLoading}
         onClick={handleStatusChange}
@@ -58,9 +62,10 @@ const AllUserWrapper = () => {
         onSubmit={handleSearch}
         isLoading={isLoading}
         setCurrentPage={setCurrentPage}
+        isAdmin
       />
     </div>
   );
 };
 
-export default AllUserWrapper;
+export default AllAdminWrapper;
