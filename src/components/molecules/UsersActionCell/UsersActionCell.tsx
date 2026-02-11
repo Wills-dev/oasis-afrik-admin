@@ -8,7 +8,15 @@ import ConfirmAction from "../ConfirmAction/ConfirmAction";
 import { DropdownMenuItem } from "@/components/ui/dropdown-menu";
 import { useUpdateUserStatus } from "@/lib/hooks/useUpdateUserStatus";
 
-const UsersActionCell = ({ id, status }: { id: string; status: string }) => {
+const UsersActionCell = ({
+  id,
+  status,
+  isAdmin,
+}: {
+  id: string;
+  status: string;
+  isAdmin?: boolean;
+}) => {
   const {
     openActivateModal,
     setOpenActivateModal,
@@ -24,7 +32,11 @@ const UsersActionCell = ({ id, status }: { id: string; status: string }) => {
     <>
       <ColumnActionDropdown>
         <DropdownMenuItem>
-          <Link href={`/users/info/${id}`}>View Details</Link>
+          {isAdmin ? (
+            <Link href={`/admins/info/${id}`}>View Details</Link>
+          ) : (
+            <Link href={`/users/info/${id}`}>View Details</Link>
+          )}
         </DropdownMenuItem>
         {status === "ACTIVE" ? (
           <>

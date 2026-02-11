@@ -6,7 +6,7 @@ import UsersTable from "../UsersTable/UsersTable";
 
 import { useGetAllUsers } from "@/lib/hooks/useGetAllUsers";
 
-const AllUserWrapper = () => {
+const AllAdminWrapper = () => {
   const {
     setLimit,
     nextPage,
@@ -25,13 +25,13 @@ const AllUserWrapper = () => {
     limit,
     setCurrentPage,
     handleStatusChange,
-  } = useGetAllUsers("USER");
+  } = useGetAllUsers("ADMIN");
 
   return (
     <div className="space-y-6">
       <PageTitle
-        title="All Users"
-        description="Track and monitor all user activities on the platform"
+        title="All Admins"
+        description="Track and monitor all admin activities on the platform"
       />
       <UserStatSummary
         isLoading={isLoading}
@@ -58,9 +58,10 @@ const AllUserWrapper = () => {
         onSubmit={handleSearch}
         isLoading={isLoading}
         setCurrentPage={setCurrentPage}
+        isAdmin
       />
     </div>
   );
 };
 
-export default AllUserWrapper;
+export default AllAdminWrapper;

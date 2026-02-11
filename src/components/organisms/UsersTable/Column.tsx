@@ -1,16 +1,16 @@
 import { CellContext, createColumnHelper } from "@tanstack/react-table";
 
 import StatusBubble from "@/components/atoms/StatusBubble/StatusBubble";
+import UsersActionCell from "@/components/molecules/UsersActionCell/UsersActionCell";
 
 import { UserTable } from "@/lib/types";
 import { formatDate } from "@/lib/helpers/dateFormats";
 import { Button } from "@/components/ui/button";
 import { ArrowUpDown } from "lucide-react";
-import UsersActionCell from "@/components/molecules/UsersActionCell/UsersActionCell";
 
 const columnHelper = createColumnHelper<UserTable>();
 
-export const UserColumns = [
+export const UserColumns = (isAdmin?: boolean) => [
   columnHelper.accessor("createdAt", {
     header: "Joined",
     cell: ({ getValue }) => {
@@ -54,42 +54,66 @@ export const UserColumns = [
     cell: ({ getValue }) => <StatusBubble status={getValue()} />,
   }),
 
-  columnHelper.accessor("isCompanyVerified", {
-    header: ({ column }) => (
-      <Button
-        variant="ghost"
-        onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-      >
-        Company verified
-        <ArrowUpDown className="ml-2 h-4 w-4" />
-      </Button>
-    ),
-    cell: ({ getValue }) => (getValue() ? "Yes" : "No"),
-  }),
+  ...(!isAdmin
+    ? [
+        columnHelper.accessor("isCompanyVerified", {
+          header: ({ column }) => (
+            <Button
+              variant="ghost"
+              onClick={() =>
+                column.toggleSorting(column.getIsSorted() === "asc")
+              }
+            >
+              Company verified
+              <ArrowUpDown className="ml-2 h-4 w-4" />
+            </Button>
+          ),
+          cell: ({ getValue }) => (getValue() ? "Yes" : "No"),
+        }),
+      ]
+    : []),
 
-  columnHelper.accessor((row) => row._count.products, {
-    id: "products",
-    header: "Products",
-    cell: ({ getValue }) => <div>{getValue()}</div>,
-  }),
+  ...(!isAdmin
+    ? [
+        columnHelper.accessor((row) => row._count.products, {
+          id: "products",
+          header: "Products",
+          cell: ({ getValue }) => <div>{getValue()}</div>,
+        }),
+      ]
+    : []),
 
-  columnHelper.accessor((row) => row._count.buyerOrders, {
-    id: "buyerOrders",
-    header: "Buyer Orders",
-    cell: ({ getValue }) => <div>{getValue()}</div>,
-  }),
+  ...(!isAdmin
+    ? [
+        columnHelper.accessor((row) => row._count.buyerOrders, {
+          id: "buyerOrders",
+          header: "Buyer Orders",
+          cell: ({ getValue }) => <div>{getValue()}</div>,
+        }),
+      ]
+    : []),
 
-  columnHelper.accessor((row) => row._count.sellerOrders, {
-    id: "sellerOrders",
-    header: "Seller Orders",
-    cell: ({ getValue }) => <div>{getValue()}</div>,
-  }),
+  ...(!isAdmin
+    ? [
+        columnHelper.accessor((row) => row._count.sellerOrders, {
+          id: "sellerOrders",
+          header: "Seller Orders",
+          cell: ({ getValue }) => <div>{getValue()}</div>,
+        }),
+      ]
+    : []),
   {
     id: "actions",
     cell: ({ row }: CellContext<UserTable, unknown>) => {
       const insight = row.original;
 
-      return <UsersActionCell status={insight?.status} id={insight?.id} />;
+      return (
+        <UsersActionCell
+          status={insight?.status}
+          id={insight?.id}
+          isAdmin={isAdmin}
+        />
+      );
     },
     enableSorting: false,
     enableHiding: false,
