@@ -1,9 +1,12 @@
-import { createColumnHelper } from "@tanstack/react-table";
+import { CellContext, createColumnHelper } from "@tanstack/react-table";
 
 import StatusBubble from "@/components/atoms/StatusBubble/StatusBubble";
 
 import { UserTable } from "@/lib/types";
 import { formatDate } from "@/lib/helpers/dateFormats";
+import { Button } from "@/components/ui/button";
+import { ArrowUpDown } from "lucide-react";
+import UsersActionCell from "@/components/molecules/UsersActionCell/UsersActionCell";
 
 const columnHelper = createColumnHelper<UserTable>();
 
@@ -18,7 +21,15 @@ export const UserColumns = [
 
   columnHelper.accessor((row) => `${row.firstName} ${row.lastName}`, {
     id: "fullName",
-    header: "Name",
+    header: ({ column }) => (
+      <Button
+        variant="ghost"
+        onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+      >
+        Full name
+        <ArrowUpDown className="ml-2 h-4 w-4" />
+      </Button>
+    ),
     cell: ({ getValue }) => <div>{getValue()}</div>,
   }),
 
@@ -31,12 +42,28 @@ export const UserColumns = [
   }),
 
   columnHelper.accessor("status", {
-    header: "Status",
+    header: ({ column }) => (
+      <Button
+        variant="ghost"
+        onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+      >
+        Status
+        <ArrowUpDown className="ml-2 h-4 w-4" />
+      </Button>
+    ),
     cell: ({ getValue }) => <StatusBubble status={getValue()} />,
   }),
 
   columnHelper.accessor("isCompanyVerified", {
-    header: "Company Verified",
+    header: ({ column }) => (
+      <Button
+        variant="ghost"
+        onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+      >
+        Company verified
+        <ArrowUpDown className="ml-2 h-4 w-4" />
+      </Button>
+    ),
     cell: ({ getValue }) => (getValue() ? "Yes" : "No"),
   }),
 
@@ -57,4 +84,14 @@ export const UserColumns = [
     header: "Seller Orders",
     cell: ({ getValue }) => <div>{getValue()}</div>,
   }),
+  {
+    id: "actions",
+    cell: ({ row }: CellContext<UserTable, unknown>) => {
+      const insight = row.original;
+
+      return <UsersActionCell status={insight?.status} id={insight?.id} />;
+    },
+    enableSorting: false,
+    enableHiding: false,
+  },
 ];

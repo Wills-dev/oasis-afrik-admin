@@ -25,3 +25,19 @@ export const getAllUsers = async ({
     throw error;
   }
 };
+
+export const updateUserStatus = async ({
+  id,
+  status,
+}: {
+  id: string;
+  status: string;
+}) => {
+  try {
+    const url = `/admin/users/${id}/status`;
+    const { data } = await axiosInstance.patch(url, { status });
+    return data;
+  } catch (error) {
+    throw error;
+  }
+};
