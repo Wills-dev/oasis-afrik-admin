@@ -23,6 +23,7 @@ export interface fetchDataProps {
   countryId?: string;
   dateRange?: string;
   tab?: string;
+  role?: "ADMIN" | "USER";
 }
 
 export interface TableWrapperProps<TData = unknown> {
@@ -136,4 +137,20 @@ export type UserSummary = {
   firstName: string;
   lastName: string;
   email: string;
+};
+
+export type UserTable = {
+  id: string;
+  email: string;
+  firstName: string;
+  lastName: string;
+  role: "USER" | "ADMIN" | string;
+  status: "ACTIVE" | "INACTIVE" | string;
+  isCompanyVerified: boolean;
+  createdAt: string;
+  _count: {
+    products: number;
+    buyerOrders: number;
+    sellerOrders: number;
+  };
 };
