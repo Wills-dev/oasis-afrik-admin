@@ -145,7 +145,7 @@ export type UserTable = {
   firstName: string;
   lastName: string;
   role: "USER" | "ADMIN" | string;
-  status: "ACTIVE" | "INACTIVE" | string;
+  status: string;
   isCompanyVerified: boolean;
   createdAt: string;
   _count: {
