@@ -7,9 +7,10 @@ import { HistoryProps } from "@/lib/types";
 
 import TableLoader from "@/components/atoms/skeleton/TableLoader";
 import TableWrapper from "../TableWrapper/TableWrapper";
-import { CategoryColumn } from "./CategoryColumn";
 
-const CatgoryTable = ({
+import { CountryColumn } from "./CountryColumn";
+
+const CountryTable = ({
   isLoading,
   data,
   totalPages,
@@ -28,7 +29,7 @@ const CatgoryTable = ({
   onSubmit,
   setCurrentPage,
 }: HistoryProps) => {
-  const typedColumns = CategoryColumn as ColumnDef<unknown>[];
+  const typedColumns = CountryColumn as ColumnDef<unknown>[];
 
   return (
     <motion.div
@@ -65,4 +66,4 @@ const CatgoryTable = ({
   );
 };
 
-export default CatgoryTable;
+export default CountryTable;
