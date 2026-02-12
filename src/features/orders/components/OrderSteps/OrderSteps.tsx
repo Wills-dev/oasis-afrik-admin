@@ -31,7 +31,7 @@ const OrderSteps = ({ data }: { data: Order }) => {
               <motion.div
                 initial={{ height: "0%" }}
                 animate={{
-                  height: `${(currentStepIndex / (orderSteps.length - 1)) * 100}%`,
+                  height: `${((currentStepIndex + 1) / (orderSteps.length - 1)) * 100}%`,
                 }}
                 transition={{ duration: 1, delay: 0.3 }}
                 className="w-full bg-green-600"
@@ -40,8 +40,9 @@ const OrderSteps = ({ data }: { data: Order }) => {
 
             <div className="relative space-y-6">
               {orderSteps.map((step, index) => {
-                const isCompleted = index < currentStepIndex;
-                const isCurrent = index === currentStepIndex;
+                const isCompleted =
+                  index < currentStepIndex || index === currentStepIndex;
+                const nextStep = index === currentStepIndex + 1;
                 const isPending = index > currentStepIndex;
 
                 return (
@@ -57,7 +58,8 @@ const OrderSteps = ({ data }: { data: Order }) => {
                         w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold relative z-10 shrink-0
                         transition-all duration-300
                         ${isCompleted ? "bg-green-600 text-white shadow-lg" : ""}
-                        ${isCurrent ? "bg-yellow-500 border-4 border-yellow-500 text-white shadow-lg scale-110" : ""}
+                        
+                        ${nextStep ? "bg-yellow-500 border-4 border-yellow-500 text-white shadow-lg scale-110" : ""}
                         ${isPending ? "bg-slate-200 text-slate-400 border-2 border-slate-300" : ""}
                       `}
                     >
@@ -68,7 +70,7 @@ const OrderSteps = ({ data }: { data: Order }) => {
                       <p
                         className={`
                           text-sm font-bold leading-tight mb-1
-                          ${isCompleted || isCurrent ? "text-slate-900" : "text-slate-400"}
+                          ${isCompleted ? "text-slate-900" : "text-slate-400"}
                         `}
                       >
                         {step.label}

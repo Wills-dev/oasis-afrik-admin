@@ -28,14 +28,14 @@ const OrderPaymentSummary = ({ data }: { data: Order }) => {
         <div className="flex justify-between items-start">
           <span className="text-slate-600">Amount Charged</span>
           <span className="font-semibold text-slate-900">
-            {`${getCurrencySign("NGN")}${data?.amountChargedNgn && numberWithCommas(Number(data?.amountChargedNgn))}`}
+            {`${getCurrencySign("NGN")}${data?.amountChargedNgn ? numberWithCommas(Number(data?.amountChargedNgn)) : "0.00"}`}
           </span>
         </div>
         <div className="pt-4 border-t border-slate-200">
           <div className="flex justify-between items-start mb-2">
             <span className="font-bold text-slate-900">Total</span>
             <span className="font-bold text-2xl text-emerald-600">
-              {`${getCurrencySign("NGN")}${data?.amountChargedNgn && numberWithCommas(Number(data?.amountChargedNgn))}`}
+              {`${data?.currency && getCurrencySign(data?.currency)}${data?.amount ? numberWithCommas(Number(data?.amount)) : "0.00"}`}
             </span>
           </div>
         </div>
