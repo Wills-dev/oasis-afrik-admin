@@ -1,13 +1,9 @@
 import {
-  Calendar,
-  Coins,
-  Globe,
   Layers,
   LayoutGrid,
   Lock,
   Newspaper,
   Package,
-  Ruler,
   ShieldCheck,
   ShoppingCart,
   UserCircle,
@@ -46,36 +42,6 @@ export const links = [
       },
     ],
   },
-  {
-    title: "Configuration",
-    links: [
-      {
-        name: "currencies",
-        link: "/config/currencies",
-        icon: <Coins className="w-4 h-4" />,
-      },
-      {
-        name: "units",
-        link: "/config/units",
-        icon: <Ruler className="w-4 h-4" />,
-      },
-      {
-        name: "periods",
-        link: "/config/periods",
-        icon: <Calendar className="w-4 h-4" />,
-      },
-      {
-        name: "categories",
-        link: "/config/categories",
-        icon: <Layers className="w-4 h-4" />,
-      },
-      {
-        name: "countries",
-        link: "/config/countries",
-        icon: <Globe className="w-4 h-4" />,
-      },
-    ],
-  },
 
   {
     title: "Admin Management",
@@ -84,6 +50,11 @@ export const links = [
         name: "all news",
         link: "/insights",
         icon: <Newspaper className="w-4 h-4" />,
+      },
+      {
+        name: "configuration",
+        link: "/configuration/categories",
+        icon: <Layers className="w-4 h-4" />,
       },
       {
         name: "manage admins",
@@ -115,4 +86,24 @@ export const timePeriods = [
   { value: "weekly", label: "Weekly" },
   { value: "monthly", label: "Monthly" },
   { value: "yearly", label: "Yearly" },
+];
+
+export const configurationLinks = [
+  {
+    name: "categories",
+    link: "/configuration/categories",
+  },
+  { name: "currencies", link: "/configuration/currencies" },
+  {
+    name: "units",
+    link: "/configuration/units",
+  },
+  {
+    name: "period",
+    link: "/configuration/period",
+  },
+  {
+    name: "countries",
+    link: "/configuration/countries",
+  },
 ];
