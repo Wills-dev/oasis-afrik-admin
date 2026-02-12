@@ -1,28 +1,30 @@
 "use client";
-
 import { FormEvent, useEffect } from "react";
 
 import ConfirmAction from "../ConfirmAction/ConfirmAction";
 import ColumnActionDropdown from "../ColumnActionDropdown/ColumnActionDropdown";
-import CountryActionModal from "../modals/CountryActionModal/CountryActionModal";
+import CurrencyActionModal from "../modals/CurrencyActionModal/CurrencyActionModal";
 
 import { DropdownMenuItem } from "@/components/ui/dropdown-menu";
+import { useEditCurrency } from "@/lib/hooks/useEditCurrency";
+import { useDeleteCurrency } from "@/lib/hooks/useDeleteCurrency";
 
-import { useEditCountry } from "@/lib/hooks/useEditCountry";
-import { useDeleteCountry } from "@/lib/hooks/useDeleteCountry";
-
-const CountryActionCell = ({
+const CurrencyActionCell = ({
   id,
   name,
   code,
   status,
+  symbol,
+  rateToNgn,
 }: {
   id: string;
   status: string;
   name: string;
   code: string;
+  symbol: string;
+  rateToNgn: string;
 }) => {
-  const { isOpen, setIsOpen, isPending, handleDelete } = useDeleteCountry();
+  const { isOpen, setIsOpen, isPending, handleDelete } = useDeleteCurrency();
   const {
     open,
     setOpen,
@@ -33,7 +35,7 @@ const CountryActionCell = ({
     isPending: isUpdating,
     handleSubmit,
     setFormData,
-  } = useEditCountry();
+  } = useEditCurrency();
 
   const onSubmit = (e: FormEvent) => {
     handleSubmit(e, id);
@@ -43,9 +45,11 @@ const CountryActionCell = ({
     setFormData({
       name,
       code,
+      symbol,
+      rateToNgn,
     });
     setIsActive(status);
-  }, [code, status, setIsActive, name, setFormData]);
+  }, [code, status, setIsActive, name, symbol, rateToNgn, setFormData]);
 
   return (
     <>
@@ -70,10 +74,10 @@ const CountryActionCell = ({
         setOpen={setIsOpen}
         onCancel={() => setIsOpen(false)}
         onConfirm={() => handleDelete(id)}
-        title="Are You Sure You Want to delete country?"
+        title="Are You Sure You Want to delete currency?"
         description="Are you sure you want to delete this country? When deleted, you can't retrive it anymore."
       />
-      <CountryActionModal
+      <CurrencyActionModal
         handleSubmit={onSubmit}
         open={open}
         isActive={isActive}
@@ -82,10 +86,10 @@ const CountryActionCell = ({
         setOpen={setOpen}
         formData={formData}
         isPending={isUpdating}
-        title="Edit country info"
+        title="Edit currency info"
       />
     </>
   );
 };
 
-export default CountryActionCell;
+export default CurrencyActionCell;
