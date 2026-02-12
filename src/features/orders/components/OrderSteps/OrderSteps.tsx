@@ -27,18 +27,18 @@ const OrderSteps = ({ data }: { data: Order }) => {
           </h2>
 
           <div className="relative">
-            <div className="absolute top-5 left-0 right-0 h-1 bg-slate-200">
+            <div className="absolute left-5 top-0 bottom-0 w-1 bg-slate-200">
               <motion.div
-                initial={{ width: "0%" }}
+                initial={{ height: "0%" }}
                 animate={{
-                  width: `${(currentStepIndex / (orderSteps.length - 1)) * 100}%`,
+                  height: `${(currentStepIndex / (orderSteps.length - 1)) * 100}%`,
                 }}
                 transition={{ duration: 1, delay: 0.3 }}
-                className="h-full bg-green-600"
+                className="w-full bg-green-600"
               />
             </div>
 
-            <div className="relative grid grid-cols-5 gap-4">
+            <div className="relative space-y-6">
               {orderSteps.map((step, index) => {
                 const isCompleted = index < currentStepIndex;
                 const isCurrent = index === currentStepIndex;
@@ -47,33 +47,33 @@ const OrderSteps = ({ data }: { data: Order }) => {
                 return (
                   <motion.div
                     key={step.status}
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
+                    initial={{ opacity: 0, x: -10 }}
+                    animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.4, delay: 0.2 + index * 0.1 }}
-                    className="flex flex-col items-center text-center"
+                    className="flex items-start gap-4"
                   >
                     <div
                       className={`
-                            w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold mb-3 relative z-10
-                            transition-all duration-300
-                            ${isCompleted ? "bg-green-600 text-white shadow-lg" : ""}
-                            ${isCurrent ? "bg-white border-4 border-yellow-500 text-yellow-600 shadow-lg scale-110" : ""}
-                            ${isPending ? "bg-slate-200 text-slate-400 border-2 border-slate-300" : ""}
-                          `}
+                        w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold relative z-10 shrink-0
+                        transition-all duration-300
+                        ${isCompleted ? "bg-green-600 text-white shadow-lg" : ""}
+                        ${isCurrent ? "bg-yellow-500 border-4 border-yellow-500 text-white shadow-lg scale-110" : ""}
+                        ${isPending ? "bg-slate-200 text-slate-400 border-2 border-slate-300" : ""}
+                      `}
                     >
                       {isCompleted ? "✓" : index + 1}
                     </div>
 
-                    <div className="space-y-1">
+                    <div className="flex-1 pt-1">
                       <p
                         className={`
-                              text-xs font-bold leading-tight
-                              ${isCompleted || isCurrent ? "text-slate-900" : "text-slate-400"}
-                            `}
+                          text-sm font-bold leading-tight mb-1
+                          ${isCompleted || isCurrent ? "text-slate-900" : "text-slate-400"}
+                        `}
                       >
                         {step.label}
                       </p>
-                      <p className="text-xs text-slate-500 hidden lg:block">
+                      <p className="text-xs text-slate-500">
                         {step.description}
                       </p>
                     </div>
