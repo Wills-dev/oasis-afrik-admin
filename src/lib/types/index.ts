@@ -162,3 +162,17 @@ export interface CreateAdminData {
   firstName: string;
   lastName: string;
 }
+
+export interface TabType {
+  value: string;
+  label: string;
+  content: React.ReactElement;
+}
+
+export interface ConfigData {
+  createdAt: string;
+  name: string;
+  status: string;
+  id: string;
+  description?: null | string;
+}
