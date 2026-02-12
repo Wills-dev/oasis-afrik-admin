@@ -69,12 +69,12 @@ export const links = [
     links: [
       {
         name: "profile",
-        link: "/settings/profile",
+        link: "/profile",
         icon: <UserCircle className="w-4 h-4" />,
       },
       {
         name: "security",
-        link: "/settings/security",
+        link: "/security",
         icon: <Lock className="w-4 h-4" />,
       },
     ],
