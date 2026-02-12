@@ -1,7 +1,7 @@
 import { axiosInstance } from "../axiosInstance";
 import { fetchDataProps } from "../types";
 
-export const getAllCategories = async ({
+export const getAllCountries = async ({
   currentPage,
   limit,
   search,
@@ -16,7 +16,7 @@ export const getAllCategories = async ({
     if (search) params.set("search", search);
     if (status) params.set("status", status);
 
-    const url = `/admin/system/categories?${params.toString()}`;
+    const url = `/admin/system/countries?${params.toString()}`;
     const { data } = await axiosInstance.get(url);
     return data;
   } catch (error) {
@@ -24,9 +24,9 @@ export const getAllCategories = async ({
   }
 };
 
-export const deleteCategory = async ({ id }: { id: string }) => {
+export const deleteCountry = async ({ id }: { id: string }) => {
   try {
-    const url = `/admin/system/categories/${id}`;
+    const url = `/admin/system/countries/${id}`;
     const { data } = await axiosInstance.delete(url);
     return data;
   } catch (error) {
@@ -34,41 +34,40 @@ export const deleteCategory = async ({ id }: { id: string }) => {
   }
 };
 
-export const updateCategory = async ({
+export const updateCountry = async ({
   id,
   name,
   status,
+  code,
 }: {
   id: string;
   name: string;
   status: string;
+  code: string;
 }) => {
   try {
-    const payload: {
-      name: string;
-      status: string;
-    } = { name, status };
+    const url = `/admin/system/countries/${id}`;
 
-    const url = `/admin/system/categories/${id}`;
-
-    const { data } = await axiosInstance.put(url, payload);
+    const { data } = await axiosInstance.put(url, { code, status, name });
     return data;
   } catch (error) {
     throw error;
   }
 };
 
-export const postCategory = async ({
+export const postCountry = async ({
   name,
   status,
+  code,
 }: {
   name: string;
+  code: string;
   status: string;
 }) => {
   try {
-    const url = `/admin/system/categories`;
+    const url = `/admin/system/countries`;
 
-    const { data } = await axiosInstance.post(url, { name, status });
+    const { data } = await axiosInstance.post(url, { name, code, status });
     return data;
   } catch (error) {
     throw error;

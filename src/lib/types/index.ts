@@ -174,5 +174,6 @@ export interface ConfigData {
   name: string;
   status: string;
   id: string;
+  code?: string;
   description?: null | string;
 }

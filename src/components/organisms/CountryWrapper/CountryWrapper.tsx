@@ -1,12 +1,12 @@
 "use client";
 
 import ConfigurationSummary from "@/components/molecules/ConfigurationSummary/ConfigurationSummary";
-import CatgoryTable from "../CategoryTable/CategoryTable";
-import CategoryActionPanel from "@/components/molecules/CategoryActionPanel/CategoryActionPanel";
+import CountryTable from "../CountryTable/CountryTable";
+import CountryActionPanel from "@/components/molecules/CountryActionPanel/CountryActionPanel";
 
-import { useGetCategories } from "@/lib/hooks/useGetCategories";
+import { useGetAllCountries } from "@/lib/hooks/useGetAllCountries";
 
-const CategoryWrapper = () => {
+const CountryWrapper = () => {
   const {
     setLimit,
     nextPage,
@@ -25,7 +25,7 @@ const CategoryWrapper = () => {
     limit,
     setCurrentPage,
     handleStatusChange,
-  } = useGetCategories();
+  } = useGetAllCountries();
 
   return (
     <div className="space-y-6">
@@ -36,8 +36,8 @@ const CategoryWrapper = () => {
         active={data?.stats?.active}
         inactive={data?.stats?.inactive}
       />
-      <CategoryActionPanel />
-      <CatgoryTable
+      <CountryActionPanel />
+      <CountryTable
         data={data?.data || []}
         totalPages={data?.pagination?.totalPages}
         currentPage={currentPage}
@@ -60,4 +60,4 @@ const CategoryWrapper = () => {
   );
 };
 
-export default CategoryWrapper;
+export default CountryWrapper;
