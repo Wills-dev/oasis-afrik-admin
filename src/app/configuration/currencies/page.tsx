@@ -1,7 +1,12 @@
-import React from "react";
+import CurrenciesWrapper from "@/components/molecules/CurrenciesWrapper/CurrenciesWrapper";
+import ConfigurationLayout from "@/components/templates/ConfigurationLayout/ConfigurationLayout";
 
 const page = () => {
-  return <div>page</div>;
+  return (
+    <ConfigurationLayout title="Currency Configuration">
+      <CurrenciesWrapper />
+    </ConfigurationLayout>
+  );
 };
 
 export default page;

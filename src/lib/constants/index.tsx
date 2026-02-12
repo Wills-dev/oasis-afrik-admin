@@ -93,17 +93,17 @@ export const configurationLinks = [
     name: "categories",
     link: "/configuration/categories",
   },
-  { name: "currencies", link: "/configuration/currencies" },
   {
-    name: "units",
-    link: "/configuration/units",
+    name: "countries",
+    link: "/configuration/countries",
   },
+  { name: "currencies", link: "/configuration/currencies" },
   {
     name: "period",
     link: "/configuration/period",
   },
   {
-    name: "countries",
-    link: "/configuration/countries",
+    name: "units",
+    link: "/configuration/units",
   },
 ];

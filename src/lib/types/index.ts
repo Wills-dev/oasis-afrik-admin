@@ -176,4 +176,6 @@ export interface ConfigData {
   id: string;
   code?: string;
   description?: null | string;
+  rateToNgn: string;
+  symbol: string;
 }
