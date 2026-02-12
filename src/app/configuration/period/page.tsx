@@ -1,7 +1,12 @@
-import React from "react";
+import PeriodWrapper from "@/components/organisms/PeriodWrapper/PeriodWrapper";
+import ConfigurationLayout from "@/components/templates/ConfigurationLayout/ConfigurationLayout";
 
 const PeriodsPage = () => {
-  return <div>PeriodsPage</div>;
+  return (
+    <ConfigurationLayout title="Period Configuration">
+      <PeriodWrapper />
+    </ConfigurationLayout>
+  );
 };
 
 export default PeriodsPage;

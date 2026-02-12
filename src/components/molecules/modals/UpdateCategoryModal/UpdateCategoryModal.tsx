@@ -17,6 +17,7 @@ const UpdateCategoryModal = ({
   isActive,
   setIsActive,
   title,
+  nameCaption = "Category name",
 }: {
   handleSubmit: (e: FormEvent) => void;
   isPending: boolean;
@@ -27,6 +28,7 @@ const UpdateCategoryModal = ({
   setIsActive: (item: string) => void;
   isActive: string;
   title: string;
+  nameCaption?: string;
 }) => {
   const isNameEmpty = name.trim() === "";
 
@@ -39,7 +41,7 @@ const UpdateCategoryModal = ({
     >
       <form className="space-y-4" onSubmit={handleSubmit}>
         <div className="space-y-2">
-          <Label title="Category name" />
+          <Label title={nameCaption} />
           <Input
             value={name}
             onChange={(e) => setName(e.target.value)}
