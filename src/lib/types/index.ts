@@ -178,4 +178,5 @@ export interface ConfigData {
   description?: null | string;
   rateToNgn: string;
   symbol: string;
+  abbreviation: string;
 }

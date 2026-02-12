@@ -5,7 +5,7 @@ interface LabelProps {
 
 const Label = ({
   title,
-  className = "text-sm font-medium text-gray-800",
+  className = "text-sm font-medium text-gray-800 capitalize",
 }: LabelProps) => {
   return <label className={`block ${className}`}>{title}</label>;
 };

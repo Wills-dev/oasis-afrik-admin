@@ -60,7 +60,7 @@ const CountryActionModal = ({
           />
         </div>
         <div className="space-y-2">
-          <Label title="Category Status" />
+          <Label title="Country Status" />
           <div className="flex items-center justify-between rounded-lg border p-4">
             <div className="space-y-1">
               <p className="text-sm font-medium">
@@ -68,8 +68,8 @@ const CountryActionModal = ({
               </p>
               <p className="text-sm text-muted-foreground">
                 {isActive === "ACTIVE"
-                  ? "This category is visible and can be used."
-                  : "This category is disabled and won't be visible."}
+                  ? "This country is visible and can be used."
+                  : "This country is disabled and won't be visible."}
               </p>
             </div>
 

@@ -1,30 +1,28 @@
 "use client";
+
 import { FormEvent, useEffect } from "react";
 
 import ConfirmAction from "../ConfirmAction/ConfirmAction";
 import ColumnActionDropdown from "../ColumnActionDropdown/ColumnActionDropdown";
-import CurrencyActionModal from "../modals/CurrencyActionModal/CurrencyActionModal";
+
+import UnitActionModal from "../modals/UnitActionModal/UnitActionModal";
 
 import { DropdownMenuItem } from "@/components/ui/dropdown-menu";
-import { useEditCurrency } from "@/lib/hooks/useEditCurrency";
-import { useDeleteCurrency } from "@/lib/hooks/useDeleteCurrency";
+import { useDeleteUnit } from "@/lib/hooks/useDeleteUnit";
+import { useEditUnit } from "@/lib/hooks/useEditUnit";
 
-const CurrencyActionCell = ({
+const UnitActionCell = ({
   id,
   name,
-  code,
+  abbreviation,
   status,
-  symbol,
-  rateToNgn,
 }: {
   id: string;
   status: string;
   name: string;
-  code: string;
-  symbol: string;
-  rateToNgn: string;
+  abbreviation: string;
 }) => {
-  const { isOpen, setIsOpen, isPending, handleDelete } = useDeleteCurrency();
+  const { isOpen, setIsOpen, isPending, handleDelete } = useDeleteUnit();
   const {
     open,
     setOpen,
@@ -35,21 +33,18 @@ const CurrencyActionCell = ({
     isPending: isUpdating,
     handleSubmit,
     setFormData,
-  } = useEditCurrency();
+  } = useEditUnit();
 
   const onSubmit = (e: FormEvent) => {
     handleSubmit(e, id);
   };
-
   useEffect(() => {
     setFormData({
       name,
-      code,
-      symbol,
-      rateToNgn,
+      abbreviation,
     });
     setIsActive(status);
-  }, [code, status, setIsActive, name, symbol, rateToNgn, setFormData]);
+  }, [abbreviation, status, setIsActive, name, setFormData]);
 
   return (
     <>
@@ -74,10 +69,10 @@ const CurrencyActionCell = ({
         setOpen={setIsOpen}
         onCancel={() => setIsOpen(false)}
         onConfirm={() => handleDelete(id)}
-        title="Are You Sure You Want to delete currency?"
-        description="Are you sure you want to delete this currency? When deleted, you can't retrive it anymore."
+        title="Are You Sure You Want to delete unit?"
+        description="Are you sure you want to delete this unit? When deleted, you can't retrive it anymore."
       />
-      <CurrencyActionModal
+      <UnitActionModal
         handleSubmit={onSubmit}
         open={open}
         isActive={isActive}
@@ -86,10 +81,10 @@ const CurrencyActionCell = ({
         setOpen={setOpen}
         formData={formData}
         isPending={isUpdating}
-        title="Edit currency info"
+        title="Edit unit info"
       />
     </>
   );
 };
 
-export default CurrencyActionCell;
+export default UnitActionCell;
