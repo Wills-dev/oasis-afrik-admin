@@ -22,6 +22,7 @@ export interface User {
   status?: string;
   emailVerified?: boolean;
   isCompanyVerified?: boolean;
+  createdAt?: string;
 }
 
 export interface UserState {

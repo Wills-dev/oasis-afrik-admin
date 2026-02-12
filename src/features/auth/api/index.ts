@@ -132,8 +132,27 @@ export const verifyCompanyDetails = async ({
         headers: {
           "Content-Type": "multipart/form-data",
         },
-      }
+      },
     );
+    return data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const changePassword = async ({
+  oldPassword,
+  newPassword,
+}: {
+  oldPassword: string;
+  newPassword: string;
+}) => {
+  try {
+    const url = `/auth/change-password`;
+    const { data } = await axiosInstance.post(url, {
+      currentPassword: oldPassword,
+      newPassword,
+    });
     return data;
   } catch (error) {
     throw error;
