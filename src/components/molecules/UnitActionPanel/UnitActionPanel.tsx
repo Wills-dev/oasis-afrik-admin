@@ -1,41 +1,39 @@
 "use client";
 
 import Button from "@/components/atoms/Button/Button";
-import UpdateCategoryModal from "../modals/UpdateCategoryModal/UpdateCategoryModal";
+import { useAddUnit } from "@/lib/hooks/useAddUnit";
+import UnitActionModal from "../modals/UnitActionModal/UnitActionModal";
 
-import { useAddPeriod } from "@/lib/hooks/useAddPeriod";
-
-const PeriodActionPanel = () => {
+const UnitActionPanel = () => {
   const {
     open,
     setOpen,
     isActive,
     setIsActive,
-    name,
-    setName,
+    formData,
+    handleChange,
     isPending,
     handleSubmit,
-  } = useAddPeriod();
+  } = useAddUnit();
+
   return (
     <div className="flex justify-end">
       <Button width="w-fit" onClick={() => setOpen(true)}>
-        Add period
+        Add new unit
       </Button>
-      <UpdateCategoryModal
+      <UnitActionModal
         handleSubmit={handleSubmit}
         open={open}
         isActive={isActive}
         setIsActive={setIsActive}
-        setName={setName}
+        handleChange={handleChange}
         setOpen={setOpen}
-        name={name}
+        formData={formData}
         isPending={isPending}
-        title="Add New Period"
-        nameCaption="Period name"
-        type="period"
+        title="Add New Unit"
       />
     </div>
   );
 };
 
-export default PeriodActionPanel;
+export default UnitActionPanel;

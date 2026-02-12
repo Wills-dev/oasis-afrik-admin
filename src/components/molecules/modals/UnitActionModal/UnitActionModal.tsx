@@ -6,33 +6,30 @@ import Input from "@/components/atoms/Input/Input";
 import Button from "@/components/atoms/Button/Button";
 
 import { Switch } from "@/components/ui/switch";
+import { areAllFieldsFilled } from "@/lib/helpers/areAllFieldsFilled";
 
-const UpdateCategoryModal = ({
+const UnitActionModal = ({
   handleSubmit,
   isPending,
   open,
   setOpen,
-  name,
-  setName,
+  formData,
+  handleChange,
   isActive,
   setIsActive,
   title,
-  nameCaption = "Category name",
-  type = "category",
 }: {
   handleSubmit: (e: FormEvent) => void;
   isPending: boolean;
   open: boolean;
   setOpen: (item: boolean) => void;
-  setName: (item: string) => void;
-  name: string;
+  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  formData: { name: string; abbreviation: string };
   setIsActive: (item: string) => void;
   isActive: string;
   title: string;
-  nameCaption?: string;
-  type?: string;
 }) => {
-  const isNameEmpty = name.trim() === "";
+  const isFormFilled = areAllFieldsFilled(formData);
 
   return (
     <ModalWrapper
@@ -43,17 +40,27 @@ const UpdateCategoryModal = ({
     >
       <form className="space-y-4" onSubmit={handleSubmit}>
         <div className="space-y-2">
-          <Label title={nameCaption} />
+          <Label title="Unit name" />
           <Input
-            value={name}
-            onChange={(e) => setName(e.target.value)}
+            value={formData?.name}
+            onChange={handleChange}
             type="text"
             name="name"
             placeholder=""
           />
         </div>
         <div className="space-y-2">
-          <Label title={`${type} Status`} />
+          <Label title="Unit abbreviation" />
+          <Input
+            value={formData?.abbreviation}
+            onChange={handleChange}
+            type="text"
+            name="abbreviation"
+            placeholder=""
+          />
+        </div>
+        <div className="space-y-2">
+          <Label title="Unit Status" />
           <div className="flex items-center justify-between rounded-lg border p-4">
             <div className="space-y-1">
               <p className="text-sm font-medium">
@@ -61,8 +68,8 @@ const UpdateCategoryModal = ({
               </p>
               <p className="text-sm text-muted-foreground">
                 {isActive === "ACTIVE"
-                  ? `This ${type} is visible and can be used.`
-                  : `This ${type} is disabled and won't be visible.`}
+                  ? "This unit is visible and can be used."
+                  : "This unit is disabled and won't be visible."}
               </p>
             </div>
 
@@ -76,7 +83,7 @@ const UpdateCategoryModal = ({
           </div>
         </div>
 
-        <Button type="submit" loading={isPending} disabled={isNameEmpty}>
+        <Button type="submit" loading={isPending} disabled={!isFormFilled}>
           Proceed
         </Button>
       </form>
@@ -84,4 +91,4 @@ const UpdateCategoryModal = ({
   );
 };
 
-export default UpdateCategoryModal;
+export default UnitActionModal;

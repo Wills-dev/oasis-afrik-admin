@@ -80,7 +80,7 @@ const CurrencyActionModal = ({
           />
         </div>
         <div className="space-y-2">
-          <Label title="Category Status" />
+          <Label title="Currency Status" />
           <div className="flex items-center justify-between rounded-lg border p-4">
             <div className="space-y-1">
               <p className="text-sm font-medium">
@@ -88,8 +88,8 @@ const CurrencyActionModal = ({
               </p>
               <p className="text-sm text-muted-foreground">
                 {isActive === "ACTIVE"
-                  ? "This category is visible and can be used."
-                  : "This category is disabled and won't be visible."}
+                  ? "This currency is visible and can be used."
+                  : "This currency is disabled and won't be visible."}
               </p>
             </div>
 

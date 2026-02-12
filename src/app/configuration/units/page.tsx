@@ -1,7 +1,12 @@
-import React from "react";
+import UnitWrapper from "@/components/organisms/UnitWrapper/UnitWrapper";
+import ConfigurationLayout from "@/components/templates/ConfigurationLayout/ConfigurationLayout";
 
 const UnitsPage = () => {
-  return <div>UnitsPage</div>;
+  return (
+    <ConfigurationLayout title="Unit Configuration">
+      <UnitWrapper />
+    </ConfigurationLayout>
+  );
 };
 
 export default UnitsPage;

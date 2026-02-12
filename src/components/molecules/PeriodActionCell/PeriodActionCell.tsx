@@ -63,8 +63,8 @@ const PeriodActionCell = ({
         setOpen={setIsOpen}
         onCancel={() => setIsOpen(false)}
         onConfirm={() => handleDelete(id)}
-        title="Are You Sure You Want to delete category?"
-        description="Are you sure you want to delete this category? When deleted, you can't retrive it anymore."
+        title="Are You Sure You Want to delete period?"
+        description="Are you sure you want to delete this period? When deleted, you can't retrive it anymore."
       />
       <UpdateCategoryModal
         handleSubmit={onSubmit}
@@ -77,6 +77,7 @@ const PeriodActionCell = ({
         isPending={isUpdating}
         nameCaption="Period name"
         title="Update Period Info"
+        type="period"
       />
     </>
   );
