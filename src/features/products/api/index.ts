@@ -19,24 +19,6 @@ export const getProducts = async ({
   }
 };
 
-export const getUserProducts = async ({
-  currentPage,
-  limit,
-  search,
-  filter,
-}: fetchDataProps) => {
-  try {
-    const url = `/products/user-products?page=${currentPage}&limit=${limit}${
-      filter ? `&filter=${filter}` : ""
-    }${search ? `&search=${search}` : ""}`;
-
-    const { data } = await axiosInstance.get(url);
-    return data;
-  } catch (error) {
-    throw error;
-  }
-};
-
 export const getProductInfo = async ({ productId }: { productId: string }) => {
   try {
     const url = `/products/${productId}`;

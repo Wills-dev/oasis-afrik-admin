@@ -1,9 +1,11 @@
-import { createColumnHelper, CellContext } from "@tanstack/react-table";
 import Link from "next/link";
-import StatusBubble from "@/components/atoms/StatusBubble/StatusBubble";
+
+import { createColumnHelper, CellContext } from "@tanstack/react-table";
 import { Product } from "../../types";
 import { formatDate } from "@/lib/helpers/dateFormats";
+
 import ProjectActionCell from "../ProjectActionCell/ProjectActionCell";
+import StatusBubble from "@/components/atoms/StatusBubble/StatusBubble";
 
 const columnHelper = createColumnHelper<Product>();
 

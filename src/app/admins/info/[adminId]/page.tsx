@@ -1,7 +1,7 @@
 import DashboardLayout from "@/components/templates/DashboardLayout/DashboardLayout";
 
-const UserInfoPage = () => {
-  return <DashboardLayout title="Admin info">UserInfoPage</DashboardLayout>;
+const AdminInfoPage = () => {
+  return <DashboardLayout title="Admin info">AdminInfoPage</DashboardLayout>;
 };
 
-export default UserInfoPage;
+export default AdminInfoPage;

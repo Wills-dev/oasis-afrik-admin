@@ -15,7 +15,6 @@ import OrderPaymentSummary from "../OrderPaymentSummary/OrderPaymentSummary";
 import { useGetOrderInfo } from "../../hooks/useGetOrderInfo";
 import { QuoteNote } from "@/features/quotes/types";
 import { formatDate } from "@/lib/helpers/dateFormats";
-import { numberWithCommas } from "@/lib/helpers";
 
 const OrderInfoWrapper = ({ orderId }: { orderId: string }) => {
   const { data, isLoading } = useGetOrderInfo(orderId);
