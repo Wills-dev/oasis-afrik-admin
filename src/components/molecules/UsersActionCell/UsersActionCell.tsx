@@ -31,13 +31,11 @@ const UsersActionCell = ({
   return (
     <>
       <ColumnActionDropdown>
-        <DropdownMenuItem>
-          {isAdmin ? (
-            <Link href={`/admins/info/${id}`}>View Details</Link>
-          ) : (
+        {!isAdmin && (
+          <DropdownMenuItem>
             <Link href={`/users/info/${id}`}>View Details</Link>
-          )}
-        </DropdownMenuItem>
+          </DropdownMenuItem>
+        )}
         {status === "ACTIVE" ? (
           <>
             <DropdownMenuItem>

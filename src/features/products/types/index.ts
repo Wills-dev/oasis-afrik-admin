@@ -44,31 +44,102 @@ export interface ProductStatus {
   status: "DRAFT" | "ACTIVE" | "INACTIVE" | "SOLD_OUT" | "DECLINED";
 }
 
-export type Product = {
+// export type Product = {
+//   id: string;
+//   productId: string;
+//   name: string;
+//   description: string;
+//   price: string;
+//   quantity: string;
+//   quantityUnitId: string;
+//   minOrder: string;
+//   minOrderUnitId: string;
+//   minLeadTime: number;
+//   maxLeadTime: number;
+//   minLeadTimePeriodId: string;
+//   maxLeadTimePeriodId: string;
+//   status: string;
+//   mainImage: string;
+//   images: string[];
+//   createdAt: string;
+//   updatedAt: string;
+
+//   currencyId: string | null;
+//   categoryId: string;
+//   countryId: string;
+//   userId: string;
+
+//   user: UserSummary;
+//   category: CategorySummary;
+// };
+
+export interface Product {
   id: string;
   productId: string;
   name: string;
   description: string;
   price: string;
-  quantity: string;
-  quantityUnitId: string;
   minOrder: string;
-  minOrderUnitId: string;
+  quantity: string;
   minLeadTime: number;
   maxLeadTime: number;
-  minLeadTimePeriodId: string;
-  maxLeadTimePeriodId: string;
-  status: string;
   mainImage: string;
   images: string[];
-  createdAt: string;
-  updatedAt: string;
-
-  currencyId: string | null;
+  status: string;
+  userId: string;
+  quantityUnitId: string;
   categoryId: string;
   countryId: string;
-  userId: string;
-
-  user: UserSummary;
-  category: CategorySummary;
-};
+  currencyId: string;
+  createdAt: string;
+  updatedAt: string;
+  category: {
+    id: string;
+    name: string;
+    description: string | null;
+    status: string;
+  };
+  country: {
+    id: string;
+    name: string;
+    code: string;
+    status: string;
+  };
+  currency: {
+    id: string;
+    code: string;
+    name: string;
+    symbol: string;
+    rateToNgn: string;
+    status: string;
+  };
+  minOrderUnit: {
+    id: string;
+    name: string;
+    abbreviation: string;
+    status: string;
+  };
+  quantityUnit: {
+    id: string;
+    name: string;
+    abbreviation: string;
+    status: string;
+  };
+  minLeadTimePeriod: {
+    id: string;
+    name: string;
+    status: string;
+  };
+  maxLeadTimePeriod: {
+    id: string;
+    name: string;
+    status: string;
+  };
+  user: {
+    id: string;
+    firstName: string;
+    lastName: string;
+    email: string;
+    companyName: string;
+  };
+}

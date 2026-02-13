@@ -32,29 +32,10 @@ const OrderInfoWrapper = ({ orderId }: { orderId: string }) => {
         <InfoSkeleton />
       ) : (
         <>
-          <OrderSteps data={data} />
           <div className="grid lg:grid-cols-3 gap-6">
             <div className="lg:col-span-2 space-y-6">
+              <OrderSteps data={data} />
               <ProductDetails data={data} />
-              <div className="grid sm:grid-cols-2 gap-6">
-                <UserSummary
-                  id={data?.buyer.id}
-                  title="Buyer Information"
-                  firstName={data?.buyer.firstName}
-                  lastName={data?.buyer.lastName}
-                  email={data?.buyer.email}
-                  emailVerified={data?.buyer.emailVerified}
-                />
-                <UserSummary
-                  id={data?.seller.id}
-                  title="Seller Information"
-                  firstName={data?.seller.firstName}
-                  lastName={data?.seller.lastName}
-                  email={data?.seller.email}
-                  emailVerified={data?.seller.emailVerified}
-                />
-              </div>
-
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -90,17 +71,52 @@ const OrderInfoWrapper = ({ orderId }: { orderId: string }) => {
                     </h2>
                   </div>
                   <div className="p-6 space-y-4">
-                    {data?.quote.notes.map((note: QuoteNote) => (
-                      <div
-                        key={note?.id}
-                        className="border-l-4 border-emerald-500 pl-4 py-2"
-                      >
-                        <p className="text-slate-700">{note?.message}</p>
-                        <p className="text-xs text-slate-500 mt-1">
-                          {note?.createdAt && formatDate(note?.createdAt)}
-                        </p>
+                    <div className="flex items-center justify-end gap-2">
+                      <div className="flex flex-col items-end">
+                        <div className="w-4 h-1 bg-emerald-500" />
+                        <p className="text-xs">Buyer</p>
                       </div>
-                    ))}
+                      <div className="flex flex-col items-end">
+                        <div className="w-4 h-1 bg-yellow-500 " />
+                        <p className="text-xs">Seller</p>
+                      </div>
+                    </div>
+                    {data?.quote.notes.map((note: QuoteNote) => {
+                      const isBuyer = data?.buyerId === note?.authorId;
+                      // const amount =
+                      //   note?.amount &&
+                      //   `${data?.currency}${numberWithCommas(Number(note?.amount))}`;
+                      // const unit =
+                      //   note?.quantityUnit || data?.quantityUnit?.abbreviation;
+                      // const quantity = note?.quantity
+                      //   ? numberWithCommas(Number(note?.quantity))
+                      //   : data?.quantity
+                      //     ? numberWithCommas(Number(data?.quantity))
+                      //     : 0;
+
+                      // const formattedQuantity = `${quantity}${unit}`;
+
+                      return (
+                        <div
+                          key={note?.id}
+                          className={`border-l-4 pl-4 py-2 ${isBuyer ? "border-emerald-500" : "border-yellow-500"}`}
+                        >
+                          {/* {amount && (
+                            <DataField label="Amount" value={amount} />
+                          )}
+                          {formattedQuantity && (
+                            <DataField
+                              label="Proposed quantity"
+                              value={formattedQuantity}
+                            />
+                          )} */}
+                          <p className="text-slate-700">{note?.message}</p>
+                          <p className="text-xs text-slate-500 mt-1">
+                            {note?.createdAt && formatDate(note?.createdAt)}
+                          </p>
+                        </div>
+                      );
+                    })}
                   </div>
                 </motion.div>
               )}
@@ -108,6 +124,22 @@ const OrderInfoWrapper = ({ orderId }: { orderId: string }) => {
 
             <div className="space-y-6">
               <OrderPaymentSummary data={data} />
+              <UserSummary
+                id={data?.buyer.id}
+                title="Buyer Information"
+                firstName={data?.buyer.firstName}
+                lastName={data?.buyer.lastName}
+                email={data?.buyer.email}
+                emailVerified={data?.buyer.emailVerified}
+              />
+              <UserSummary
+                id={data?.seller.id}
+                title="Seller Information"
+                firstName={data?.seller.firstName}
+                lastName={data?.seller.lastName}
+                email={data?.seller.email}
+                emailVerified={data?.seller.emailVerified}
+              />
               <motion.div
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
