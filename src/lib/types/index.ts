@@ -180,3 +180,23 @@ export interface ConfigData {
   symbol: string;
   abbreviation: string;
 }
+
+export interface CompanyDetails {
+  adminName: string;
+  businessRegistrationNumber: string;
+  cacDocumentUrl: string;
+  companyAddress: string;
+  companyEmail: string;
+  companyName: string;
+  createdAt: string;
+  id: string;
+  phoneNumber: string;
+  rejectionReason: string | null;
+  reviewedAt: string | null;
+  reviewedBy: string | null;
+  status: "PENDING" | "APPROVED" | "REJECTED";
+  updatedAt: string;
+  userId: string;
+  utilityDocumentUrl: string;
+  validIdUrl: string;
+}
