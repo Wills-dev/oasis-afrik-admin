@@ -66,3 +66,13 @@ export const createAdmin = async ({
     throw error;
   }
 };
+
+export const getUserInfo = async ({ userId }: { userId: string }) => {
+  try {
+    const url = `/admin/users/${userId}`;
+    const { data } = await axiosInstance.get(url);
+    return data?.data;
+  } catch (error) {
+    throw error;
+  }
+};

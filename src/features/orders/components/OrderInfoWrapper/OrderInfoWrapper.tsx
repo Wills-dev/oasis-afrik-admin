@@ -1,7 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
-
 import AppBreadcrumb from "@/components/molecules/AppBreadcrumb/AppBreadcrumb";
 import DataField from "@/components/atoms/DataField/DataField";
 import InfoSkeleton from "@/components/atoms/skeleton/InfoSkeleton";
@@ -11,6 +9,7 @@ import TimelineItem from "@/components/atoms/TimelineItem/TimelineItem";
 import UserSummary from "@/components/molecules/UserSummary/UserSummary";
 import ProductDetails from "../ProductDetails/ProductDetails";
 import OrderPaymentSummary from "../OrderPaymentSummary/OrderPaymentSummary";
+import InfoCardWrapper from "@/components/atoms/InfoCardWrapper/InfoCardWrapper";
 
 import { useGetOrderInfo } from "../../hooks/useGetOrderInfo";
 import { QuoteNote } from "@/features/quotes/types";
@@ -36,17 +35,7 @@ const OrderInfoWrapper = ({ orderId }: { orderId: string }) => {
             <div className="lg:col-span-2 space-y-6">
               <OrderSteps data={data} />
               <ProductDetails data={data} />
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.6 }}
-                className="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden"
-              >
-                <div className="border-b border-slate-200 px-6 py-4 bg-slate-50">
-                  <h2 className="text-xl font-bold text-slate-900">
-                    Delivery Information
-                  </h2>
-                </div>
+              <InfoCardWrapper title="Delivery Information">
                 <div className="p-6">
                   <DataField label="Delivery Address" value={data?.address} />
                   <div className="mt-4 pt-4 border-t border-slate-200">
@@ -56,20 +45,10 @@ const OrderInfoWrapper = ({ orderId }: { orderId: string }) => {
                     />
                   </div>
                 </div>
-              </motion.div>
+              </InfoCardWrapper>
 
               {data?.quote?.notes && data?.quote.notes.length > 0 && (
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.7 }}
-                  className="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden"
-                >
-                  <div className="border-b border-slate-200 px-6 py-4 bg-slate-50">
-                    <h2 className="text-xl font-bold text-slate-900">
-                      Order Notes
-                    </h2>
-                  </div>
+                <InfoCardWrapper title="Order Notes">
                   <div className="p-6 space-y-4">
                     <div className="flex items-center justify-end gap-2">
                       <div className="flex flex-col items-end">
@@ -118,7 +97,7 @@ const OrderInfoWrapper = ({ orderId }: { orderId: string }) => {
                       );
                     })}
                   </div>
-                </motion.div>
+                </InfoCardWrapper>
               )}
             </div>
 
@@ -140,15 +119,7 @@ const OrderInfoWrapper = ({ orderId }: { orderId: string }) => {
                 email={data?.seller.email}
                 emailVerified={data?.seller.emailVerified}
               />
-              <motion.div
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.5, delay: 0.5 }}
-                className="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden"
-              >
-                <div className="border-b border-slate-200 px-6 py-4 bg-slate-50">
-                  <h3 className="font-bold text-slate-900">Order Timeline</h3>
-                </div>
+              <InfoCardWrapper title="Order Timeline">
                 <div className="p-6 space-y-4">
                   <TimelineItem
                     label="Order Created"
@@ -168,7 +139,7 @@ const OrderInfoWrapper = ({ orderId }: { orderId: string }) => {
                     active
                   />
                 </div>
-              </motion.div>
+              </InfoCardWrapper>
             </div>
           </div>
         </>
