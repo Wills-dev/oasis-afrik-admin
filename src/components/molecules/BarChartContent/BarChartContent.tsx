@@ -8,52 +8,38 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart";
-import TimeFilterDropdown from "../TimeFilterDropdown/TimeFilterDropdown";
-export const description = "A multiple bar chart";
-const chartData = [
-  { month: "January", desktop: 186, mobile: 80 },
-  { month: "February", desktop: 305, mobile: 200 },
-  { month: "March", desktop: 237, mobile: 120 },
-  { month: "April", desktop: 73, mobile: 190 },
-  { month: "May", desktop: 209, mobile: 130 },
-  { month: "June", desktop: 214, mobile: 140 },
-  { month: "July", desktop: 186, mobile: 80 },
-  { month: "August", desktop: 305, mobile: 200 },
-  { month: "September", desktop: 237, mobile: 120 },
-  { month: "October", desktop: 73, mobile: 190 },
-];
 
 const chartConfig = {
-  desktop: {
+  count: {
     label: "Users",
     color: "#009933",
   },
 } satisfies ChartConfig;
 
-const BarChartContent = () => {
+const BarChartContent = ({
+  userGrowth,
+}: {
+  userGrowth: { period: string; count: number }[];
+}) => {
   return (
     <div className="flex-1 w-full border border-gray-200 rounded-md min-w-[280px]">
       <Card className="shadow-none border-0">
         <CardHeader className="flex item-center justify-between">
           <CardTitle>Users</CardTitle>
-          <TimeFilterDropdown />
         </CardHeader>
         <CardContent>
           <ChartContainer config={chartConfig}>
-            <BarChart accessibilityLayer data={chartData}>
+            <BarChart accessibilityLayer data={userGrowth}>
               <CartesianGrid vertical={false} />
               <XAxis
-                dataKey="month"
+                dataKey="period"
                 tickLine={false}
                 tickMargin={10}
                 axisLine={false}
-                tickFormatter={(value) => value.slice(0, 3)}
+                tickFormatter={(value) => value.slice(0, 11)}
               />
-              <ChartTooltip
-                cursor={false}
-                content={<ChartTooltipContent hideLabel />}
-              />
-              <Bar dataKey="desktop" fill="var(--color-desktop)" radius={8} />
+              <ChartTooltip cursor={false} content={<ChartTooltipContent />} />
+              <Bar dataKey="count" fill="#009933" radius={4} />
             </BarChart>
           </ChartContainer>
         </CardContent>
