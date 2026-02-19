@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 
 import { useDispatch } from "react-redux";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 
 import { getCurrentUser } from "../api";
 import { clearAuthClear } from "@/lib/helpers/cookie";
@@ -13,8 +13,6 @@ import {
 
 export const useCurrentUser = (enabled: boolean = true) => {
   const dispatch = useDispatch();
-
-  const queryClient = useQueryClient();
 
   const { data, isLoading, error, isError, refetch } = useQuery({
     queryKey: ["currentUser"],
@@ -38,12 +36,12 @@ export const useCurrentUser = (enabled: boolean = true) => {
   useEffect(() => {
     if (isError) {
       dispatch(clearUser());
+      dispatch(setLoading(false));
       clearAuthClear("oasisAfrikUserId");
       clearAuthClear("refreshToken");
-      queryClient.clear();
       console.log("error fetching current user", error);
     }
-  }, [isError, error, dispatch, queryClient]);
+  }, [isError, error, dispatch]);
 
   return {
     isLoading,

@@ -8,16 +8,7 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart";
-import TimeFilterDropdown from "../TimeFilterDropdown/TimeFilterDropdown";
 
-const chartData = [
-  { month: "January", desktop: 186 },
-  { month: "February", desktop: 305 },
-  { month: "March", desktop: 237 },
-  { month: "April", desktop: 73 },
-  { month: "May", desktop: 209 },
-  { month: "June", desktop: 214 },
-];
 const chartConfig = {
   desktop: {
     label: "Orders",
@@ -25,19 +16,22 @@ const chartConfig = {
   },
 } satisfies ChartConfig;
 
-const AreaChartContent = () => {
+const AreaChartContent = ({
+  orderOverview,
+}: {
+  orderOverview: { period: string; count: number }[];
+}) => {
   return (
     <div className="flex-1 w-full border border-gray-200 rounded-md min-w-[280px]">
       <Card className="shadow-none border-0">
         <CardHeader className="flex item-center justify-between flex-wrap">
-          <CardTitle>Order overview</CardTitle>
-          <TimeFilterDropdown />
+          <CardTitle>Orders overview</CardTitle>
         </CardHeader>
         <CardContent>
           <ChartContainer config={chartConfig}>
             <AreaChart
               accessibilityLayer
-              data={chartData}
+              data={orderOverview}
               margin={{
                 left: 12,
                 right: 12,
@@ -45,22 +39,22 @@ const AreaChartContent = () => {
             >
               <CartesianGrid vertical={false} />
               <XAxis
-                dataKey="month"
+                dataKey="period"
                 tickLine={false}
                 axisLine={false}
                 tickMargin={8}
-                tickFormatter={(value) => value.slice(0, 3)}
+                tickFormatter={(value) => value.slice(0, 11)}
               />
               <ChartTooltip
                 cursor={false}
                 content={<ChartTooltipContent indicator="line" />}
               />
               <Area
-                dataKey="desktop"
+                dataKey="count"
                 type="natural"
-                fill="var(--color-desktop)"
+                fill="#0099331F"
                 fillOpacity={0.4}
-                stroke="var(--color-desktop)"
+                stroke="#0099331F"
               />
             </AreaChart>
           </ChartContainer>

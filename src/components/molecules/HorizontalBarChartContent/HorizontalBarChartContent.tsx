@@ -8,17 +8,11 @@ import {
   ChartTooltipContent,
   type ChartConfig,
 } from "@/components/ui/chart";
-export const description = "A mixed bar chart";
-const chartData = [
-  { currency: "NGN", revenue: 275, fill: "#79def2" },
-  { currency: "USD", revenue: 200, fill: "#4cdaf7" },
-  { currency: "GBP", revenue: 187, fill: "#20a0b9" },
-  { currency: "EUR", revenue: 173, fill: "#09778d" },
-  { currency: "YEN", revenue: 90, fill: "#08424e" },
-];
+
 const chartConfig = {
   revenue: {
     label: "Revenue",
+    color: "#000000",
   },
   NGN: {
     label: "NGN",
@@ -42,7 +36,18 @@ const chartConfig = {
   },
 } satisfies ChartConfig;
 
-const HorizontalBarChartContent = () => {
+const HorizontalBarChartContent = ({
+  currencyBalances,
+}: {
+  currencyBalances: { currency: string; amount: number }[];
+}) => {
+  const addColorToData = currencyBalances.map((item) => ({
+    ...item,
+    fill:
+      chartConfig[item.currency as keyof typeof chartConfig]?.color ||
+      "#79def2",
+  }));
+
   return (
     <div className="flex-1 w-full border border-gray-200 rounded-md min-w-[280px]">
       <Card className="shadow-none border-0">
@@ -53,7 +58,7 @@ const HorizontalBarChartContent = () => {
           <ChartContainer config={chartConfig}>
             <BarChart
               accessibilityLayer
-              data={chartData}
+              data={addColorToData}
               layout="vertical"
               margin={{
                 left: 0,
@@ -69,12 +74,12 @@ const HorizontalBarChartContent = () => {
                   chartConfig[value as keyof typeof chartConfig]?.label
                 }
               />
-              <XAxis dataKey="revenue" type="number" hide />
+              <XAxis dataKey="amount" type="number" hide />
               <ChartTooltip
                 cursor={false}
                 content={<ChartTooltipContent hideLabel />}
               />
-              <Bar dataKey="revenue" layout="vertical" radius={5} />
+              <Bar dataKey="amount" layout="vertical" radius={5} />
             </BarChart>
           </ChartContainer>
         </CardContent>
