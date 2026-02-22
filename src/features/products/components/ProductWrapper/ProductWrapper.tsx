@@ -25,6 +25,7 @@ const ProductWrapper = () => {
     limit,
     setCurrentPage,
     handleStatusChange,
+    setSelectedDateFilterValue,
   } = useGetAllProducts();
 
   return (
@@ -59,6 +60,7 @@ const ProductWrapper = () => {
         onSubmit={handleSearch}
         isLoading={isLoading}
         setCurrentPage={setCurrentPage}
+        setSelectedDateFilterValue={setSelectedDateFilterValue}
       />
     </div>
   );

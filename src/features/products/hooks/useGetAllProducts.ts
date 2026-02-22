@@ -21,16 +21,26 @@ export const useGetAllProducts = () => {
     status,
     setCurrentPage,
     handleStatusChange,
+    selectedDateFilterValue,
+    setSelectedDateFilterValue,
   } = useTableState();
 
   const { data, isPending, isLoading, isError, error, refetch } = useQuery({
-    queryKey: ["all products", submittedQuery, limit, currentPage, status],
+    queryKey: [
+      "all products",
+      submittedQuery,
+      limit,
+      currentPage,
+      status,
+      selectedDateFilterValue,
+    ],
     queryFn: () =>
       getProducts({
         currentPage,
         limit,
         search: submittedQuery,
         status,
+        selectedDateFilterValue,
       }),
     enabled: true,
     staleTime: 5 * 60 * 1000,
@@ -59,5 +69,6 @@ export const useGetAllProducts = () => {
     refetch,
     setCurrentPage,
     handleStatusChange,
+    setSelectedDateFilterValue,
   };
 };

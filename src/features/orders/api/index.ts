@@ -49,3 +49,21 @@ export const getOrderInfo = async ({ orderId }: { orderId: string }) => {
     throw error;
   }
 };
+
+export const updateOrderInfo = async ({
+  orderId,
+  status,
+  reason,
+}: {
+  orderId: string;
+  status: string;
+  reason: string;
+}) => {
+  try {
+    const url = `/orders/${orderId}/status`;
+    const { data } = await axiosInstance.patch(url, { status, reason });
+    return data?.data;
+  } catch (error) {
+    throw error;
+  }
+};

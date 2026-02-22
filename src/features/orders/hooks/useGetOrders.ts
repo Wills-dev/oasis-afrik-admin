@@ -71,5 +71,6 @@ export const useGetOrders = () => {
     setCurrentPage,
     handleStatusChange,
     setSelectedDateFilterValue,
+    selectedDateFilterValue,
   };
 };

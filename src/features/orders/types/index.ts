@@ -34,4 +34,5 @@ export type Order = {
   seller: UserSummary;
   product: Product;
   quote: Quote;
+  cancellationReason?: string | null;
 };
