@@ -28,6 +28,7 @@ const ProductTable = ({
   handleClear,
   onSubmit,
   setCurrentPage,
+  setSelectedDateFilterValue,
 }: HistoryProps) => {
   const typedColumns = Columns as ColumnDef<unknown>[];
 
@@ -60,6 +61,7 @@ const ProductTable = ({
           handleClear={handleClear}
           onSubmit={onSubmit}
           setCurrentPage={setCurrentPage}
+          setSelectedDateFilterValue={setSelectedDateFilterValue}
         />
       )}
     </motion.div>

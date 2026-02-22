@@ -2,9 +2,10 @@ import { FormEvent } from "react";
 
 import { Table } from "@tanstack/react-table";
 
+import { DateFilterValue } from "@/lib/types";
+
 import ColumnSorting from "../ColumnSorting/ColumnSorting";
 import SearchInput from "../SearchInput/SearchInput";
-import { DateFilterValue } from "@/lib/types";
 import DateFilterComponent from "@/components/organisms/DateFilterComponent/DateFilterComponent";
 
 interface TableResourceToolbarProps<TData = unknown> {
@@ -32,20 +33,21 @@ const TableResourceToolbar = ({
 
   return (
     <div className="flex justify-between items-center w-full gap-6">
-      {showSearch && (
-        <SearchInput
-          value={search}
-          handleChange={handleChange}
-          handleClear={handleClear}
-          onSubmit={onSubmit}
+      {setSelectedDateFilterValue !== undefined && (
+        <DateFilterComponent
+          onDateChange={(value) => {
+            setSelectedDateFilterValue(value);
+          }}
+          className="max-md:hidden"
         />
       )}
       <div className="flex justify-end items-center gap-6">
-        {setSelectedDateFilterValue !== undefined && (
-          <DateFilterComponent
-            onDateChange={(value) => {
-              setSelectedDateFilterValue(value);
-            }}
+        {showSearch && (
+          <SearchInput
+            value={search}
+            handleChange={handleChange}
+            handleClear={handleClear}
+            onSubmit={onSubmit}
           />
         )}
         <ColumnSorting table={table} />

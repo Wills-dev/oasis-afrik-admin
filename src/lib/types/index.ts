@@ -45,6 +45,7 @@ export interface TableWrapperProps<TData = unknown> {
   handleClear?: () => void;
   onSubmit?: (e: FormEvent) => void;
   setCurrentPage?: (page: number) => void;
+  selectedDateFilterValue?: DateFilterValue | null;
   setSelectedDateFilterValue?: (value: DateFilterValue) => void;
 }
 
@@ -72,6 +73,7 @@ export interface HistoryProps<TData = unknown> {
   onSubmit?: (e: FormEvent) => void;
   setCurrentPage: (page: number) => void;
   isAdmin?: boolean;
+  selectedDateFilterValue?: DateFilterValue | null;
   setSelectedDateFilterValue?: (value: DateFilterValue) => void;
 }
 
