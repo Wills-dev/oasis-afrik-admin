@@ -22,12 +22,27 @@ export const useGetOrders = () => {
     status,
     setCurrentPage,
     handleStatusChange,
+    selectedDateFilterValue,
+    setSelectedDateFilterValue,
   } = useTableState();
 
   const { data, isPending, isLoading, isError, error, refetch } = useQuery({
-    queryKey: ["all orders", submittedQuery, limit, currentPage, status],
+    queryKey: [
+      "all orders",
+      submittedQuery,
+      limit,
+      currentPage,
+      status,
+      selectedDateFilterValue,
+    ],
     queryFn: () =>
-      getAllOrders({ currentPage, limit, search: submittedQuery, status }),
+      getAllOrders({
+        currentPage,
+        limit,
+        search: submittedQuery,
+        status,
+        selectedDateFilterValue,
+      }),
     enabled: true,
     staleTime: 5 * 60 * 1000,
     retry: 1,
@@ -55,5 +70,6 @@ export const useGetOrders = () => {
     refetch,
     setCurrentPage,
     handleStatusChange,
+    setSelectedDateFilterValue,
   };
 };
