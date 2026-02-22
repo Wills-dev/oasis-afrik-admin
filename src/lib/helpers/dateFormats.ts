@@ -1,4 +1,4 @@
-import { DateOptions } from "../types";
+import { DateOptions, DateRange, FilterOption } from "../types";
 
 export const convertDateFormat = (oldDate: string) => {
   const date = new Date(oldDate).toString().split(" ");
@@ -54,4 +54,51 @@ export const isSameDay = (date1: Date, date2: Date): boolean => {
 export const formatCreatedAt = (dateString: Date) => {
   const date = new Date(dateString);
   return date.toISOString().split("T")[0];
+};
+
+const getStartOfWeek = (date: Date): Date => {
+  const d = new Date(date);
+  const day = d.getDay();
+  const diff = d.getDate() - day;
+  return new Date(d.setDate(diff));
+};
+
+const addMonths = (date: Date, months: number): Date => {
+  const result = new Date(date);
+  result.setMonth(result.getMonth() + months);
+  return result;
+};
+
+export const getDateRange = (
+  filterType: FilterOption,
+  today: Date = new Date(),
+): DateRange => {
+  const startOfToday = new Date(today.setHours(0, 0, 0, 0));
+
+  switch (filterType) {
+    case "daily":
+      return { start: new Date(startOfToday), end: new Date(startOfToday) };
+
+    case "weekly":
+      return {
+        start: getStartOfWeek(startOfToday),
+        end: new Date(startOfToday),
+      };
+
+    case "monthly":
+      return {
+        start: new Date(startOfToday.getFullYear(), startOfToday.getMonth(), 1),
+        end: new Date(startOfToday),
+      };
+
+    case "last_month":
+      const lastMonth = addMonths(startOfToday, -1);
+      return {
+        start: new Date(lastMonth.getFullYear(), lastMonth.getMonth(), 1),
+        end: new Date(startOfToday.getFullYear(), startOfToday.getMonth(), 0),
+      };
+
+    default:
+      return { start: new Date(startOfToday), end: new Date(startOfToday) };
+  }
 };

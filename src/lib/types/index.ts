@@ -24,6 +24,7 @@ export interface fetchDataProps {
   dateRange?: string;
   tab?: string;
   role?: "ADMIN" | "USER";
+  selectedDateFilterValue?: DateFilterValue | null;
 }
 
 export interface TableWrapperProps<TData = unknown> {
@@ -44,6 +45,7 @@ export interface TableWrapperProps<TData = unknown> {
   handleClear?: () => void;
   onSubmit?: (e: FormEvent) => void;
   setCurrentPage?: (page: number) => void;
+  setSelectedDateFilterValue?: (value: DateFilterValue) => void;
 }
 
 export interface optionsType {
@@ -70,6 +72,7 @@ export interface HistoryProps<TData = unknown> {
   onSubmit?: (e: FormEvent) => void;
   setCurrentPage: (page: number) => void;
   isAdmin?: boolean;
+  setSelectedDateFilterValue?: (value: DateFilterValue) => void;
 }
 
 export interface Testimonial {
@@ -199,4 +202,21 @@ export interface CompanyDetails {
   userId: string;
   utilityDocumentUrl: string;
   validIdUrl: string;
+}
+
+export type FilterOption =
+  | "daily"
+  | "weekly"
+  | "monthly"
+  | "last_month"
+  | "custom";
+
+export interface DateRange {
+  start: Date;
+  end: Date;
+}
+
+export interface DateFilterValue {
+  label: FilterOption;
+  dateRange: DateRange;
 }

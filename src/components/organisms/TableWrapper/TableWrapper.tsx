@@ -38,6 +38,7 @@ const TableWrapper = ({
   handleClear,
   onSubmit,
   setCurrentPage,
+  setSelectedDateFilterValue,
 }: TableWrapperProps) => {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
@@ -76,6 +77,7 @@ const TableWrapper = ({
         handleClear={handleClear}
         onSubmit={onSubmit}
         table={table}
+        setSelectedDateFilterValue={setSelectedDateFilterValue}
       />
       <Table className="">
         <TableHeaderWrap table={table} />

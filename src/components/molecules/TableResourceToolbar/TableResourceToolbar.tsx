@@ -4,6 +4,8 @@ import { Table } from "@tanstack/react-table";
 
 import ColumnSorting from "../ColumnSorting/ColumnSorting";
 import SearchInput from "../SearchInput/SearchInput";
+import { DateFilterValue } from "@/lib/types";
+import DateFilterComponent from "@/components/organisms/DateFilterComponent/DateFilterComponent";
 
 interface TableResourceToolbarProps<TData = unknown> {
   search?: string | number;
@@ -11,6 +13,7 @@ interface TableResourceToolbarProps<TData = unknown> {
   handleClear?: () => void;
   onSubmit?: (e: FormEvent) => void;
   table: Table<TData>;
+  setSelectedDateFilterValue?: (value: DateFilterValue) => void;
 }
 
 const TableResourceToolbar = ({
@@ -19,6 +22,7 @@ const TableResourceToolbar = ({
   handleClear,
   onSubmit,
   table,
+  setSelectedDateFilterValue,
 }: TableResourceToolbarProps) => {
   const showSearch =
     search !== undefined &&
@@ -36,8 +40,16 @@ const TableResourceToolbar = ({
           onSubmit={onSubmit}
         />
       )}
-
-      <ColumnSorting table={table} />
+      <div className="flex justify-end items-center gap-6">
+        {setSelectedDateFilterValue !== undefined && (
+          <DateFilterComponent
+            onDateChange={(value) => {
+              setSelectedDateFilterValue(value);
+            }}
+          />
+        )}
+        <ColumnSorting table={table} />
+      </div>
     </div>
   );
 };

@@ -1,11 +1,13 @@
 import { axiosInstance } from "@/lib/axiosInstance";
 import { fetchDataProps } from "@/lib/types";
+import { format } from "date-fns";
 
 export const getAllOrders = async ({
   currentPage,
   limit,
   search,
   status,
+  selectedDateFilterValue,
 }: fetchDataProps) => {
   try {
     const params = new URLSearchParams();
@@ -15,6 +17,19 @@ export const getAllOrders = async ({
 
     if (search) params.set("search", search);
     if (status) params.set("status", status);
+    if (selectedDateFilterValue) {
+      params.set("period", selectedDateFilterValue.label);
+      if (selectedDateFilterValue.label === "custom") {
+        params.set(
+          "startDate",
+          format(selectedDateFilterValue.dateRange.start, "yyyy-MM-dd"),
+        );
+        params.set(
+          "endDate",
+          format(selectedDateFilterValue.dateRange.end, "yyyy-MM-dd"),
+        );
+      }
+    }
 
     const url = `/admin/orders?${params.toString()}`;
 

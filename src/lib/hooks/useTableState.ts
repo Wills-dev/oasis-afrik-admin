@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 
 import { createAuthCookie, readAuthCookie } from "../helpers/cookie";
+import { DateFilterValue } from "../types";
 
 export const useTableState = () => {
   const router = useRouter();
@@ -23,6 +24,8 @@ export const useTableState = () => {
   const [search, setSearch] = useState(initialSearch);
   const [filter, setFilter] = useState("");
   const [submittedQuery, setSubmittedQuery] = useState<string | null>(null);
+  const [selectedDateFilterValue, setSelectedDateFilterValue] =
+    useState<DateFilterValue | null>(null);
 
   const nextPage = (totalPages: number) => {
     if (currentPage < totalPages) {
@@ -125,5 +128,7 @@ export const useTableState = () => {
     status,
     handleStatusChange,
     setCurrentPage,
+    selectedDateFilterValue,
+    setSelectedDateFilterValue,
   };
 };

@@ -25,6 +25,7 @@ const OrdersWrapper = () => {
     limit,
     setCurrentPage,
     handleStatusChange,
+    setSelectedDateFilterValue,
   } = useGetOrders();
 
   return (
@@ -58,6 +59,7 @@ const OrdersWrapper = () => {
         onSubmit={handleSearch}
         isLoading={isLoading}
         setCurrentPage={setCurrentPage}
+        setSelectedDateFilterValue={setSelectedDateFilterValue}
       />
     </div>
   );
