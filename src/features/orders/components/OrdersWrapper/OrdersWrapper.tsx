@@ -40,6 +40,13 @@ const OrdersWrapper = () => {
         total={data?.stats?.total}
         paid={data?.stats?.paid}
         pending={data?.stats?.pending}
+        awaitingVerification={data?.stats?.awaitingVerification}
+        processing={data?.stats?.processing}
+        shipped={data?.stats?.shipped}
+        delivered={data?.stats?.delivered}
+        received={data?.stats?.received}
+        settled={data?.stats?.settled}
+        cancelled={data?.stats?.cancelled}
       />
       <OrderTable
         data={data?.orders || []}
