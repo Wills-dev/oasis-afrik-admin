@@ -63,6 +63,11 @@ export const useTableState = () => {
     setSearch(value);
   };
 
+  const handleSwithTab = (tab: string) => {
+    setTab(tab);
+    setCurrentPage(1);
+  };
+
   const handleStatusChange = (status: string) => {
     setStatus(status);
     setCurrentPage(1);
@@ -125,6 +130,7 @@ export const useTableState = () => {
     filter,
     tab,
     setTab,
+    handleSwithTab,
     status,
     handleStatusChange,
     setCurrentPage,
