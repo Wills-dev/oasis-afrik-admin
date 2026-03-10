@@ -61,8 +61,28 @@ export const updateOrderInfo = async ({
 }) => {
   try {
     const url = `/orders/${orderId}/status`;
-    const { data } = await axiosInstance.patch(url, { status, reason });
+    const payload: { status: string; reason?: string } = { status };
+    if (reason.trim() !== "") {
+      payload.reason = reason;
+    }
+    const { data } = await axiosInstance.patch(url, payload);
     return data?.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const updatePaymentProof = async ({
+  orderId,
+  status,
+}: {
+  orderId: string;
+  status: boolean;
+}) => {
+  try {
+    const url = `/admin/orders/${orderId}/verify-payment`;
+    const { data } = await axiosInstance.post(url, { approve: status });
+    return data;
   } catch (error) {
     throw error;
   }

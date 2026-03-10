@@ -33,7 +33,12 @@ const OrderInfoWrapper = ({ orderId }: { orderId: string }) => {
         <>
           <div className="grid lg:grid-cols-3 gap-6">
             <div className="lg:col-span-2 space-y-6">
-              <OrderSteps data={data} />
+              <OrderSteps
+                data={data}
+                shippedEvidence={data?.shippingEvidence}
+                deliveredEvidence={data?.deliveryEvidence}
+                paymentProof={data?.paymentProof}
+              />
               <ProductDetails data={data} />
               <InfoCardWrapper title="Delivery Information">
                 <div className="p-6">

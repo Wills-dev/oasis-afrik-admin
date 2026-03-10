@@ -8,6 +8,11 @@ export const orderSteps: {
   {
     status: "PENDING_PAYMENT",
     label: "Payment Pending",
+    description: "Awaiting payment",
+  },
+  {
+    status: "AWAITING_PAYMENT_VERIFICATION",
+    label: "Reviewing Payment",
     description: "Awaiting payment confirmation",
   },
   {
@@ -34,5 +39,10 @@ export const orderSteps: {
     status: "RECEIVED",
     label: "Received",
     description: "Order has been received by buyer",
+  },
+  {
+    status: "SETTLED",
+    label: "Settled",
+    description: "Seller has been paid",
   },
 ];
