@@ -4,11 +4,13 @@ import { UserSummary } from "@/lib/types";
 
 export type OrderStatus =
   | "PENDING_PAYMENT"
+  | "AWAITING_PAYMENT_VERIFICATION"
   | "PAID"
   | "PROCESSING"
   | "SHIPPED"
   | "DELIVERED"
   | "RECEIVED"
+  | "SETTLED"
   | "CANCELLED";
 
 export type Order = {

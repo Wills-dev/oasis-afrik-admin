@@ -116,7 +116,13 @@ export const Columns = [
       const status = getValue() as Order["status"];
       return (
         <StatusBubble
-          status={status === "PENDING_PAYMENT" ? "PENDING" : status}
+          status={
+            status === "PENDING_PAYMENT"
+              ? "PENDING"
+              : status === "AWAITING_PAYMENT_VERIFICATION"
+                ? "PAYMENT_REVIEW"
+                : status
+          }
         />
       );
     },

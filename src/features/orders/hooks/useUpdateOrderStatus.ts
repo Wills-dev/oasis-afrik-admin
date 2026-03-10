@@ -10,6 +10,7 @@ import { updateOrderInfo } from "../api";
 
 export const useUpdateOrderStatus = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isOpenModal, setIsOpenModal] = useState(false);
   const [reason, setReason] = useState("");
 
   const queryClient = useQueryClient();
@@ -19,6 +20,7 @@ export const useUpdateOrderStatus = () => {
     onSuccess: (data, variables) => {
       toast.success("Order status updated successfully!", toastOption);
       setIsOpen(false);
+      setIsOpenModal(false);
       queryClient.invalidateQueries({
         queryKey: ["all orders"],
       });
@@ -31,23 +33,27 @@ export const useUpdateOrderStatus = () => {
     },
   });
 
-  const onCancelOrder = (id: string) => {
-    if (!reason) {
-      toast.error(
-        "Please provide a reason for order cancellation.",
-        toastOption,
-      );
-      return;
+  const handleUpdate = (id: string, status: "CANCELLED" | "SETTLED") => {
+    if (status === "CANCELLED") {
+      if (!reason) {
+        toast.error(
+          "Please provide a reason for order cancellation.",
+          toastOption,
+        );
+        return;
+      }
     }
-    mutate({ orderId: id, status: "CANCELLED", reason });
+    mutate({ orderId: id, status, reason });
   };
 
   return {
-    onCancelOrder,
+    handleUpdate,
     isPending,
     isOpen,
     setIsOpen,
     reason,
     setReason,
+    isOpenModal,
+    setIsOpenModal,
   };
 };
